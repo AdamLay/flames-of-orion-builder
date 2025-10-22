@@ -206,8 +206,8 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
                 <div key={`${upgradeId}-${index}`} className="card-small text-sm">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <div className="font-bold">{upgrade.name}</div>
-                      <div className="text-primary text-xs">
+                      <div className="text-primary font-bold">{upgrade.name}</div>
+                      <div className="text-xs">
                         {formatCredits(upgrade.cost)}
                         {upgrade.platformSlots === 0 && " (No PF)"}
                         {upgrade.platformSlots &&
@@ -215,8 +215,10 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
                           ` (${upgrade.platformSlots} PF)`}
                       </div>
                     </div>
-                    <button onClick={() => removeUpgrade(index)} className="btn btn-error btn-circle btn-xs">
-                      ✕
+                    <button
+                      onClick={() => removeUpgrade(index)}
+                      className="btn btn-sm btn-square btn-error btn-soft">
+                      <Trash2 className="size-4" />
                     </button>
                   </div>
                   <div className="opacity-80 text-xs mt-1">{upgrade.description}</div>
@@ -255,16 +257,16 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
                 <div key={`${weaponId}-${index}`} className="card-small text-sm">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <div className="font-bold">{weapon.name}</div>
-                      <div className="text-primary text-xs">
+                      <div className="text-primary font-bold">{weapon.name}</div>
+                      <div className="text-xs">
                         {formatCredits(weapon.cost)} | DMG: {weapon.damage}
                         {weapon.platformSlots && weapon.platformSlots > 1 && ` (${weapon.platformSlots} PF)`}
                       </div>
                     </div>
                     <button
                       onClick={() => removeRangedWeapon(index)}
-                      className="btn btn-error btn-circle btn-xs">
-                      ✕
+                      className="btn btn-sm btn-square btn-error btn-soft">
+                      <Trash2 className="size-4" />
                     </button>
                   </div>
                   {weapon.maxRange && <div className="text-gray-400 text-xs">Range: {weapon.maxRange}</div>}
@@ -276,13 +278,13 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
                       <div className="flex justify-between items-start gap-2">
                         <div className="flex-1">
                           <div className="text-xs font-semibold text-accent">Ammo: {ammo.name}</div>
-                          <div className="text-xs text-gray-400">{formatCredits(ammo.cost)}</div>
-                          <div className="text-xs text-gray-400 mt-1">{ammo.description}</div>
+                          <div className="text-xs">{formatCredits(ammo.cost)}</div>
+                          {/* <div className="text-xs text-gray-400 mt-1">{ammo.description}</div> */}
                         </div>
                         <button
                           onClick={() => removeWeaponAmmo(index)}
-                          className="btn btn-sm btn-ghost text-xs">
-                          Remove
+                          className="btn btn-sm btn-square btn-error btn-soft">
+                          <Trash2 className="size-4" />
                         </button>
                       </div>
                     ) : (
@@ -336,15 +338,15 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
                 <div key={`${weaponId}-${index}`} className="card-small text-sm">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <div className="font-bold">{weapon.name}</div>
-                      <div className="text-primary text-xs">
+                      <div className="text-primary font-bold">{weapon.name}</div>
+                      <div className="text-xs">
                         {formatCredits(weapon.cost)} | DMG: {weapon.damage}
                       </div>
                     </div>
                     <button
                       onClick={() => removeMeleeWeapon(index)}
-                      className="btn btn-error btn-circle btn-xs">
-                      ✕
+                      className="btn btn-sm btn-square btn-error btn-soft">
+                      <Trash2 className="size-4" />
                     </button>
                   </div>
                   {weapon.range && <div className="text-gray-400 text-xs">Range: {weapon.range}</div>}
