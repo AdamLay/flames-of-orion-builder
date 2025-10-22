@@ -55,3 +55,7 @@
   background-color: #d97706;
   color: white;
 }
+
+.sticky-title {
+  @apply text-3xl sticky top-0 bg-base-100 shadow-sm rounded-md p-2 z-1;
+}

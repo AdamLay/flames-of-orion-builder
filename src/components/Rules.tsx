@@ -4,7 +4,7 @@ import { MessageCircleWarning, TriangleAlert } from "lucide-react";
 export default function Rules() {
   return (
     <div className="flex flex-col gap-2">
-      <h2 className="text-3xl">INTRO BRIEFING / TOOLS</h2>
+      <h2 className="sticky-title">INTRO BRIEFING / TOOLS</h2>
 
       <h3 className="text-xl pt-4">MODELS</h3>
       <p>
@@ -46,7 +46,7 @@ export default function Rules() {
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">INTRO TO MECHS</h3>
+      <h3 className="sticky-title">INTRO TO MECHS</h3>
       <p>
         During a game you will field your Combat Unit, which typically consists of 4 Mechs. You may also
         choose to swap some Mechs for ground forces as described on Page 30. Below are the stats for the
@@ -100,7 +100,7 @@ export default function Rules() {
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">GAME STRUCTURE</h3>
+      <h3 className="sticky-title">GAME STRUCTURE</h3>
       <p>
         A game of Flames of Orion is broken down into Phases and Rounds, with players taking alternating turns
         in each Phase.
@@ -157,7 +157,7 @@ export default function Rules() {
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">ACTIVATIONS</h3>
+      <h3 className="sticky-title">ACTIVATIONS</h3>
       <p>When chosen to activate, a model performs up to 2 Actions and then generates HEAT.</p>
 
       <h4 className="text-lg pt-3">ACTIONS</h4>
@@ -201,8 +201,8 @@ export default function Rules() {
         </li>
         <li>
           <span className="font-semibold">Snapshot:</span> Move your model up to its (S), but you may pause at
-          any time during the move to make a basic Ranged Attack, at -1 to the CS roll. After resolving the
-          attack, the model completes its movement.
+          any time during the move to make a basic Ranged Attack, at -1 to the Combat Skill roll. After
+          resolving the attack, the model completes its movement.
         </li>
       </ul>
 
@@ -286,7 +286,7 @@ export default function Rules() {
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">GAME MECHANICS</h3>
+      <h3 className="sticky-title">GAME MECHANICS</h3>
 
       <h4 className="text-lg pt-3">MOVEMENT</h4>
       <p>
@@ -351,85 +351,83 @@ export default function Rules() {
 
       <div className="divider"></div>
 
-      <h4 className="text-3xl">CATASTROPHIC DAMAGE</h4>
+      <h4 className="sticky-title">CATASTROPHIC DAMAGE</h4>
       <p>
         When you score a Critical Hit, roll another d6. If you meet or exceed your model's CS, you have caused
         Catastrophic Damage! Roll 2d6 on the Catastrophic Damage table and apply the results to the target
         model. This is in addition to the +1 damage. All effects are temporary and last until the end of the
         game.
       </p>
-      <div className="overflow-x-auto my-4">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>2D6 Result</th>
-              <th>Effect</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="font-semibold">2</td>
-              <td className="font-semibold">Ammo Explodes</td>
-              <td>Deal d3 additional damage. If the model has special ammo, it is lost.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">3</td>
-              <td className="font-semibold">Platform Disabled</td>
-              <td>A random platform is disabled.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">4</td>
-              <td className="font-semibold">Targeting System Disrupted</td>
-              <td>-1 CS.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">5</td>
-              <td className="font-semibold">Cracked Reactor Core</td>
-              <td>HEAT Limit reduced by 1.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">6</td>
-              <td className="font-semibold">Ricochet</td>
-              <td>Deal 1 damage to a random model within 3".</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">7</td>
-              <td className="font-semibold">Heavy Fire</td>
-              <td>+1 Damage.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">8</td>
-              <td className="font-semibold">Leaking Hydraulics</td>
-              <td>-1 S.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">9</td>
-              <td className="font-semibold">Armor Compromised</td>
-              <td>All models firing against this model gain Armor Penetration.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">10</td>
-              <td className="font-semibold">Oil Burn</td>
-              <td>HEAT Limit reduced by 1.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">11</td>
-              <td className="font-semibold">Weapon Disabled</td>
-              <td>A random weapon is disabled.</td>
-            </tr>
-            <tr>
-              <td className="font-semibold">12</td>
-              <td className="font-semibold">Cockpit Fire</td>
-              <td>Model is reduced to 0HP.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table className="table z-0">
+        <thead>
+          <tr>
+            <th>2D6 Result</th>
+            <th>Effect</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="font-semibold">2</td>
+            <td className="font-semibold">Ammo Explodes</td>
+            <td>Deal d3 additional damage. If the model has special ammo, it is lost.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">3</td>
+            <td className="font-semibold">Platform Disabled</td>
+            <td>A random platform is disabled.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">4</td>
+            <td className="font-semibold">Targeting System Disrupted</td>
+            <td>-1 CS.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">5</td>
+            <td className="font-semibold">Cracked Reactor Core</td>
+            <td>HEAT Limit reduced by 1.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">6</td>
+            <td className="font-semibold">Ricochet</td>
+            <td>Deal 1 damage to a random model within 3".</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">7</td>
+            <td className="font-semibold">Heavy Fire</td>
+            <td>+1 Damage.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">8</td>
+            <td className="font-semibold">Leaking Hydraulics</td>
+            <td>-1 S.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">9</td>
+            <td className="font-semibold">Armor Compromised</td>
+            <td>All models firing against this model gain Armor Penetration.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">10</td>
+            <td className="font-semibold">Oil Burn</td>
+            <td>HEAT Limit reduced by 1.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">11</td>
+            <td className="font-semibold">Weapon Disabled</td>
+            <td>A random weapon is disabled.</td>
+          </tr>
+          <tr>
+            <td className="font-semibold">12</td>
+            <td className="font-semibold">Cockpit Fire</td>
+            <td>Model is reduced to 0HP.</td>
+          </tr>
+        </tbody>
+      </table>
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">HEAT</h3>
+      <h3 className="sticky-title">HEAT</h3>
       <p>
         Mechs generate immense HEAT while performing their duties in battle. This can occur when performing
         certain actions, and also when making HEAT checks at the end of a Round.
@@ -442,30 +440,28 @@ export default function Rules() {
 
       <h4 className="text-lg pt-3">HEAT CHECK</h4>
       <p>When a model is selected during the HEAT Phase, roll a d6 and consult the HEAT Check chart below.</p>
-      <div className="overflow-x-auto my-4">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>HEAT Check Roll</th>
-              <th>1</th>
-              <th>2-4</th>
-              <th>5-6</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="font-semibold">HEAT Generated</td>
-              <td>+2</td>
-              <td>+1</td>
-              <td>0</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>HEAT Check Roll</th>
+            <th>1</th>
+            <th>2-4</th>
+            <th>5-6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="font-semibold">HEAT Generated</td>
+            <td>+2</td>
+            <td>+1</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">OUT OF ACTION & EXPLODING</h3>
+      <h3 className="sticky-title">OUT OF ACTION & EXPLODING</h3>
 
       <h4 className="text-lg pt-3">OUT OF ACTION</h4>
       <p>
@@ -488,7 +484,7 @@ export default function Rules() {
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">TERRAIN</h3>
+      <h3 className="sticky-title">TERRAIN</h3>
       <p>
         A model may traverse onto terrain vertically within reason, but you must end your turn on a flat
         level. Some terrain in a game can be targeted, damaged & destroyed. If terrain is destroyed, remove it
@@ -524,7 +520,7 @@ export default function Rules() {
 
       <div className="divider"></div>
 
-      <h3 className="text-3xl">STARTING A GAME</h3>
+      <h3 className="sticky-title">STARTING A GAME</h3>
 
       <h4 className="text-lg pt-3">MISSION</h4>
       <p>
@@ -554,19 +550,23 @@ export default function Rules() {
         continue in initiative order or an order that makes sense.
       </p>
 
-      <div className="border-l-4 border-purple-500 pl-4 py-2 my-4 bg-purple-50">
-        <p className="font-bold text-sm">re: OUTNUMBERED!</p>
-        <p className="text-sm">
-          At the start of the first Round, if you have fewer models than the player with the most models, you
-          are Outnumbered. You gain 1 Pass Activation token for each model that the player has more than you.
-        </p>
-        <p className="text-sm">
-          When it is your turn to activate a model, you may instead discard one of your Pass Activation
-          tokens, and play passes to the next player.
-        </p>
-        <p className="text-sm">
-          You discard a Pass Activation token whenever the player with the most models in play loses a model.
-        </p>
+      <div className="alert alert-info alert-soft">
+        <div>
+          <p className="font-bold text-sm">re: OUTNUMBERED!</p>
+          <p className="text-sm">
+            At the start of the first Round, if you have fewer models than the player with the most models,
+            you are Outnumbered. You gain 1 Pass Activation token for each model that the player has more than
+            you.
+          </p>
+          <p className="text-sm">
+            When it is your turn to activate a model, you may instead discard one of your Pass Activation
+            tokens, and play passes to the next player.
+          </p>
+          <p className="text-sm">
+            You discard a Pass Activation token whenever the player with the most models in play loses a
+            model.
+          </p>
+        </div>
       </div>
 
       <h4 className="text-lg pt-3">SPECIAL OBJECTIVES</h4>
