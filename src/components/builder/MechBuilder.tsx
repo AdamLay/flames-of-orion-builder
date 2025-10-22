@@ -30,13 +30,14 @@ import { MeleeManager } from "./MeleeManager";
 
 interface MechBuilderProps {
   mech: Mech;
+  mechIndex: number;
   onUpdate: (mech: Mech) => void;
   onRemove: () => void;
 }
 
-export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
+export function MechBuilder({ mech, mechIndex, onUpdate, onRemove }: MechBuilderProps) {
   const stats = calculateModifiedStats(mech);
-  const totalCost = calculateMechCost(mech);
+  const totalCost = calculateMechCost(mech, mechIndex);
   const usedPlatforms = calculateUsedPlatforms(mech);
   const totalPlatforms = calculateTotalPlatforms(mech);
   console.log("mech", mech);

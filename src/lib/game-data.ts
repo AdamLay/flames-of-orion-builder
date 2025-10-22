@@ -520,8 +520,9 @@ export function getAmmoById(id: string): Ammo | undefined {
   return AMMO.find((a) => a.id === id);
 }
 
-export function calculateMechCost(mech: Mech): number {
-  let total = mech.baseCost;
+export function calculateMechCost(mech: Mech, mechIndex: number = 0): number {
+  // First 4 mechs are free, 5th and beyond cost 50,000
+  let total = mechIndex >= 4 ? 50000 : mech.baseCost;
 
   // Add upgrade costs
   mech.upgrades.forEach((upgradeId) => {

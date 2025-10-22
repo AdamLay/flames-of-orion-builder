@@ -69,7 +69,7 @@ export function BunkerManager() {
   };
 
   const getSpentCredits = (): number => {
-    return mechs.reduce((sum, mech) => sum + calculateMechCost(mech), 0);
+    return mechs.reduce((sum, mech, index) => sum + calculateMechCost(mech, index), 0);
   };
 
   const getAvailableCredits = (): number => {
@@ -190,10 +190,11 @@ export function BunkerManager() {
             </div>
           ) : (
             <div className="space-y-6">
-              {mechs.map((mech) => (
+              {mechs.map((mech, index) => (
                 <MechBuilder
                   key={mech.id}
                   mech={mech}
+                  mechIndex={index}
                   onUpdate={(updatedMech) => updateMech(mech.id, updatedMech)}
                   onRemove={() => removeMech(mech.id)}
                 />
