@@ -69,7 +69,7 @@ export const BASE_MECH_STATS: MechStats = {
   platforms: 4,
 };
 
-export const BASE_MECH_COST = 50000;
+export const BASE_MECH_COST = 0;
 
 // Frame Profiles
 export const FRAME_PROFILES: FrameProfile[] = [
