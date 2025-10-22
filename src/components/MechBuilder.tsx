@@ -65,7 +65,7 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
     }
 
     // Check platform availability
-    const newUsed = usedPlatforms + (upgrade.platformSlots || 1);
+    const newUsed = usedPlatforms + (upgrade.platformSlots ?? 1);
     if (newUsed > totalPlatforms) {
       alert(`Not enough platforms! (${usedPlatforms}/${totalPlatforms} used)`);
       return;
@@ -84,7 +84,7 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
     const weapon = getRangedWeaponById(weaponId);
     if (!weapon) return;
 
-    const newUsed = usedPlatforms + (weapon.platformSlots || 1);
+    const newUsed = usedPlatforms + (weapon.platformSlots ?? 1);
     if (newUsed > totalPlatforms) {
       alert(`Not enough platforms! (${usedPlatforms}/${totalPlatforms} used)`);
       return;
@@ -103,7 +103,7 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
     const weapon = getMeleeWeaponById(weaponId);
     if (!weapon) return;
 
-    const newUsed = usedPlatforms + (weapon.platformSlots || 1);
+    const newUsed = usedPlatforms + (weapon.platformSlots ?? 1);
     if (newUsed > totalPlatforms) {
       alert(`Not enough platforms! (${usedPlatforms}/${totalPlatforms} used)`);
       return;
