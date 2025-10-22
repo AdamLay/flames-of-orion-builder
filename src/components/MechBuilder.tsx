@@ -8,16 +8,19 @@ import {
   UPGRADES,
   RANGED_WEAPONS,
   MELEE_WEAPONS,
+  AMMO,
   getFrameProfileById,
   getUpgradeById,
   getRangedWeaponById,
   getMeleeWeaponById,
+  getAmmoById,
   calculateMechCost,
   calculateUsedPlatforms,
   calculateTotalPlatforms,
   calculateModifiedStats,
   formatCredits,
 } from "@/lib/game-data";
+import { Trash, Trash2 } from "lucide-react";
 
 interface MechBuilderProps {
   mech: Mech;
@@ -37,6 +40,18 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
 
   const updateFrameType = (frameType: FrameType) => {
     onUpdate({ ...mech, frameType });
+  };
+
+  const addWeaponAmmo = (weaponIndex: number, ammoId: string) => {
+    const newWeaponAmmo = { ...mech.weaponAmmo };
+    newWeaponAmmo[weaponIndex] = ammoId;
+    onUpdate({ ...mech, weaponAmmo: newWeaponAmmo });
+  };
+
+  const removeWeaponAmmo = (weaponIndex: number) => {
+    const newWeaponAmmo = { ...mech.weaponAmmo };
+    delete newWeaponAmmo[weaponIndex];
+    onUpdate({ ...mech, weaponAmmo: newWeaponAmmo });
   };
 
   const addUpgrade = (upgradeId: string) => {
@@ -126,8 +141,8 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
           ))}
         </select>
         <div className="text-2xl font-bold">{formatCredits(totalCost)}</div>
-        <button onClick={onRemove} className="btn btn-error">
-          Remove Mech
+        <button onClick={onRemove} className="btn btn-error btn-sm btn-square btn-soft">
+          <Trash2 className="size-4" />
         </button>
       </div>
 
@@ -234,6 +249,8 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
             {mech.rangedWeapons.map((weaponId, index) => {
               const weapon = getRangedWeaponById(weaponId);
               if (!weapon) return null;
+              const ammoId = mech.weaponAmmo?.[index];
+              const ammo = ammoId ? getAmmoById(ammoId) : null;
               return (
                 <div key={`${weaponId}-${index}`} className="card-small text-sm">
                   <div className="flex justify-between items-start">
@@ -252,6 +269,40 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
                   </div>
                   {weapon.maxRange && <div className="text-gray-400 text-xs">Range: {weapon.maxRange}</div>}
                   {weapon.special && <div className="text-gray-400 text-xs mt-1">{weapon.special}</div>}
+
+                  {/* Ammo Selection */}
+                  <div className="mt-2 pt-2 border-t border-base-300">
+                    {ammo ? (
+                      <div className="flex justify-between items-start gap-2">
+                        <div className="flex-1">
+                          <div className="text-xs font-semibold text-accent">Ammo: {ammo.name}</div>
+                          <div className="text-xs text-gray-400">{formatCredits(ammo.cost)}</div>
+                          <div className="text-xs text-gray-400 mt-1">{ammo.description}</div>
+                        </div>
+                        <button
+                          onClick={() => removeWeaponAmmo(index)}
+                          className="btn btn-sm btn-ghost text-xs">
+                          Remove
+                        </button>
+                      </div>
+                    ) : (
+                      <select
+                        onChange={(e) => {
+                          if (e.target.value) {
+                            addWeaponAmmo(index, e.target.value);
+                            e.target.value = "";
+                          }
+                        }}
+                        className="select select-sm w-full">
+                        <option value="">+ Add Ammo</option>
+                        {AMMO.map((ammoOption) => (
+                          <option key={ammoOption.id} value={ammoOption.id}>
+                            {ammoOption.name} - {formatCredits(ammoOption.cost)}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                  </div>
                 </div>
               );
             })}

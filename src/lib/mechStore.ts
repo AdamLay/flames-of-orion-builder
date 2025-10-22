@@ -25,6 +25,7 @@ export const useMechStore = create<MechStoreState>()(
             upgrades: [],
             rangedWeapons: [],
             meleeWeapons: [],
+            weaponAmmo: {},
           };
           return { mechs: [...state.mechs, newMech] };
         }),

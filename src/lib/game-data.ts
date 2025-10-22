@@ -38,6 +38,13 @@ export interface RangedWeapon {
   platformSlots?: number; // Default 1, Heavy Weapon uses 2
 }
 
+export interface Ammo {
+  id: string;
+  name: string;
+  cost: number;
+  description: string;
+}
+
 export interface MeleeWeapon {
   id: string;
   name: string;
@@ -57,6 +64,7 @@ export interface Mech {
   upgrades: string[]; // Array of upgrade IDs
   rangedWeapons: string[]; // Array of ranged weapon IDs
   meleeWeapons: string[]; // Array of melee weapon IDs
+  weaponAmmo: Record<number, string>; // Maps ranged weapon index to ammo ID
 }
 
 // Base Mech Stats
@@ -413,6 +421,50 @@ export const MELEE_WEAPONS: MeleeWeapon[] = [
   },
 ];
 
+// Ammo
+export const AMMO: Ammo[] = [
+  {
+    id: "flechette-rounds",
+    name: "Flechette Rounds",
+    cost: 5000,
+    description: "Weapons with this Ammo gain AP.",
+  },
+  {
+    id: "hellfire-rounds",
+    name: "Hellfire Rounds",
+    cost: 10000,
+    description: "Increase Weapon Damage by 1.",
+  },
+  {
+    id: "emf-rounds",
+    name: "EMF Rounds",
+    cost: 10000,
+    description:
+      "The model damaged by a weapon with this Ammo has its Speed reduced by 2 until the end of the target's next activation.",
+  },
+  {
+    id: "concussive-rounds",
+    name: "Concussive Rounds",
+    cost: 5000,
+    description:
+      'When a weapon equipped with this Ammo hits an enemy model, the target is immediately moved 2" directly away from the firing model. If this causes the model to make contact with another model, or Terrain, apply 1 Damage to each of them.',
+  },
+  {
+    id: "rapid-fire-rounds",
+    name: "Rapid Fire Rounds",
+    cost: 20000,
+    description:
+      "When a weapon loaded with this Ammo rolls a 6 to hit, apply critical damage normally, then you may roll another Ranged Attack with this weapon.",
+  },
+  {
+    id: "tracer-rounds",
+    name: "Tracer Rounds",
+    cost: 5000,
+    description:
+      "Apply Position Compromised to the model hit with this Ammo. The firing model also gains Position Compromised.",
+  },
+];
+
 // Helper functions
 export function getFrameProfileById(id: FrameType): FrameProfile | undefined {
   return FRAME_PROFILES.find((f) => f.id === id);
@@ -428,6 +480,10 @@ export function getRangedWeaponById(id: string): RangedWeapon | undefined {
 
 export function getMeleeWeaponById(id: string): MeleeWeapon | undefined {
   return MELEE_WEAPONS.find((w) => w.id === id);
+}
+
+export function getAmmoById(id: string): Ammo | undefined {
+  return AMMO.find((a) => a.id === id);
 }
 
 export function calculateMechCost(mech: Mech): number {
@@ -449,6 +505,12 @@ export function calculateMechCost(mech: Mech): number {
   mech.meleeWeapons.forEach((weaponId) => {
     const weapon = getMeleeWeaponById(weaponId);
     if (weapon) total += weapon.cost;
+  });
+
+  // Add ammo costs
+  Object.values(mech.weaponAmmo ?? {}).forEach((ammoId) => {
+    const ammo = getAmmoById(ammoId);
+    if (ammo) total += ammo.cost;
   });
 
   return total;
