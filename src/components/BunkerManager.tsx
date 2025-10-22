@@ -109,7 +109,7 @@ export function BunkerManager() {
 
           <div className="card-1 mb-4 bg-opacity-50 border-l-4 border-primary">
             <p className="text-xs text-gray-400">
-              Bay Capacity: 1 Mech, 2 Ground Vehicles, 2 Aircraft, or 3 Infantry per bay
+              Bay Capacity: You may store 1 Mech, or 2 ground vehicles, 2 aircraft, or 3 infantry in each bay
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
