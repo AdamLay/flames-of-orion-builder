@@ -7,8 +7,8 @@ interface RulesSectionProps {
 
 export function RulesSection({ title, children }: RulesSectionProps) {
   return (
-    <section className="">
-      <h2 className="sticky-title">{title}</h2>
+    <section className="flex flex-col gap-2 mb-8">
+      <h2 className="sticky-title mb-2">{title}</h2>
       {children}
     </section>
   );

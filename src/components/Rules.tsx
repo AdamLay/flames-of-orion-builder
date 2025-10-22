@@ -54,37 +54,37 @@ export default function Rules() {
 
         <h4 className="text-lg pt-3">HULL POINTS (HP)</h4>
         <p>
-          HP is how much damage a model can take before it is destroyed. Each time a model receives a point of
-          damage, reduce its HP by 1. If a model is reduced to 0HP, it immediately makes an Explode Check
-          (p.18) and is then removed from play. That model is now Out Of Action.
+          <span className="text-title font-bold">HP</span> is how much damage a model can take before it is destroyed. Each time a model receives a point of
+          damage, reduce its <span className="text-title font-bold">HP</span> by 1. If a model is reduced to 0<span className="text-title font-bold">HP</span>, it immediately makes an <span className="text-title font-bold">Explode Check</span>
+          (p.18) and is then removed from play. That model is now <span className="text-title font-bold">Out Of Action</span>.
         </p>
 
         <h4 className="text-lg pt-3">ARMOR (AR)</h4>
         <p>
-          AR is the model's ability to ignore damage. For each point of damage that a model suffers, make a
-          separate armor save. Roll equal to or greater than your AR value to ignore the point of damage.
+          <span className="text-title font-bold">AR</span> is the model's ability to ignore damage. For each point of damage that a model suffers, make a
+          separate armor save. Roll equal to or greater than your <span className="text-title font-bold">AR</span> value to ignore the point of damage.
         </p>
 
         <h4 className="text-lg pt-3">COMBAT SKILL (CS)</h4>
         <p>
-          CS is your model's ability to target and attack enemy models with Melee and Ranged attacks. Roll
-          equal to or greater than your CS value to deal damage.
+          <span className="text-title font-bold">CS</span> is your model's ability to target and attack enemy models with <span className="text-title font-bold">Melee</span> and <span className="text-title font-bold">Ranged</span> attacks. Roll
+          equal to or greater than your <span className="text-title font-bold">CS</span> value to deal damage.
         </p>
 
         <h4 className="text-lg pt-3">SPEED (S)</h4>
-        <p>S is the distance your model can move, measured in inches.</p>
+        <p><span className="text-title font-bold">S</span> is the distance your model can move, measured in inches.</p>
 
         <h4 className="text-lg pt-3">HEAT LIMIT (HL)</h4>
         <p>
-          Throughout the game, your models gain HEAT. HEAT represents the amount of strain a model can
-          withstand, and its ability to continue performing. If a model reaches or exceeds its HEAT Limit, it
-          is immediately reduced to 0 HP.
+          Throughout the game, your models gain <span className="text-title font-bold">HEAT</span>. <span className="text-title font-bold">HEAT</span> represents the amount of strain a model can
+          withstand, and its ability to continue performing. If a model reaches or exceeds its <span className="text-title font-bold">HEAT Limit</span>, it
+          is immediately reduced to 0 <span className="text-title font-bold">HP</span>.
         </p>
 
         <h4 className="text-lg pt-3">PLATFORMS (PF)</h4>
         <p>
-          PF is the number of weapons & upgrades that can be equipped to a model. All Mechs begin with 4 PF
-          slots, and may not have more than 8 PF slots. There are two types of Platforms; weapons and
+          <span className="text-title font-bold">PF</span> is the number of weapons & upgrades that can be equipped to a model. All Mechs begin with 4 <span className="text-title font-bold">PF</span>
+          slots, and may not have more than 8 <span className="text-title font-bold">PF</span> slots. There are two types of <span className="text-title font-bold">Platforms</span>; weapons and
           upgrades.
         </p>
         <ul className="list-disc pl-6">
@@ -101,50 +101,50 @@ export default function Rules() {
 
       <RulesSection title="GAME STRUCTURE">
         <p>
-          A game of Flames of Orion is broken down into Phases and Rounds, with players taking alternating
-          turns in each Phase.
+          A game of Flames of Orion is broken down into <span className="text-title font-bold">Phases</span> and <span className="text-title font-bold">Rounds</span>, with players taking alternating
+          turns in each <span className="text-title font-bold">Phase</span>.
         </p>
 
         <h4 className="text-lg pt-3">ROUNDS</h4>
         <p>
-          A game lasts 5 Rounds, and every Round is split into three Phases. Once all three Phases have been
-          completed, the next Round begins. The game ends at the completion of the 5th Round unless otherwise
+          A game lasts 5 <span className="text-title font-bold">Rounds</span>, and every <span className="text-title font-bold">Round</span> is split into three <span className="text-title font-bold">Phases</span>. Once all three <span className="text-title font-bold">Phases</span> have been
+          completed, the next <span className="text-title font-bold">Round</span> begins. The game ends at the completion of the 5th <span className="text-title font-bold">Round</span> unless otherwise
           noted.
         </p>
 
         <h4 className="text-lg pt-3">PHASES</h4>
         <p>
-          Rounds are split into three Phases, performed in this order: Initiative Phase, Activation Phase and
-          HEAT Phase. Players take turns Activating their models. After all Phases have been completed a new
-          Round begins, starting again with the Initiative Phase.
+          <span className="text-title font-bold">Rounds</span> are split into three <span className="text-title font-bold">Phases</span>, performed in this order: <span className="text-title font-bold">Initiative Phase</span>, <span className="text-title font-bold">Activation Phase</span> and
+          <span className="text-title font-bold">HEAT Phase</span>. Players take turns Activating their models. After all <span className="text-title font-bold">Phases</span> have been completed a new
+          <span className="text-title font-bold">Round</span> begins, starting again with the <span className="text-title font-bold">Initiative Phase</span>.
         </p>
 
         <h4 className="text-2xl pt-3">PHASE ORDER</h4>
-        <h3 className="text-lg pt-2">1 INITIATIVE PHASE</h3>
+        <h3 className="text-lg pt-2">1 <span className="text-title font-bold">INITIATIVE PHASE</span></h3>
         <p>
-          All players roll a d6. The highest roll wins the Initiative and takes the first turn, then next
+          All players roll a d6. The highest roll wins the <span className="text-title font-bold">Initiative</span> and takes the first turn, then next
           highest, and so on. In case of ties, roll off. Whoever finishes activating their models first adds
-          +1 to their Initiative roll on the next Round.
+          +1 to their <span className="text-title font-bold">Initiative</span> roll on the next <span className="text-title font-bold">Round</span>.
         </p>
 
-        <h3 className="text-lg pt-2">2 ACTIVATION PHASE</h3>
+        <h3 className="text-lg pt-2">2 <span className="text-title font-bold">ACTIVATION PHASE</span></h3>
         <p>
           Players take turns activating their models to perform Actions. Each model may only activate once per
-          Round. When a model is chosen to activate, it may perform up to 2 Actions. When that model finishes
+          <span className="text-title font-bold">Round</span>. When a model is chosen to activate, it may perform up to 2 Actions. When that model finishes
           its activation, the next player in initiative order does the same. This continues until all models
-          have been activated and the next Phase begins.
+          have been activated and the next <span className="text-title font-bold">Phase</span> begins.
         </p>
         <p>
           If a player has no models left to activate, the rest of the players continue activating in
           initiative order until all models have activated.
         </p>
 
-        <h3 className="text-lg pt-2">3 HEAT PHASE</h3>
+        <h3 className="text-lg pt-2">3 <span className="text-title font-bold">HEAT PHASE</span></h3>
         <p>
-          Players take turns making HEAT Checks for their models, in Initiative Order, until all models have
-          taken HEAT Checks. When it is their turn, the player selects a model with an Activation Token, makes
-          a HEAT Check for that model, and then discards that model's activation token. Then the next player
-          selects a model to make a HEAT Check, and so on.
+          Players take turns making <span className="text-title font-bold">HEAT Checks</span> for their models, in Initiative Order, until all models have
+          taken <span className="text-title font-bold">HEAT Checks</span>. When it is their turn, the player selects a model with an <span className="text-title font-bold">Activation Token</span>, makes
+          a <span className="text-title font-bold">HEAT Check</span> for that model, and then discards that model's activation token. Then the next player
+          selects a model to make a <span className="text-title font-bold">HEAT Check</span>, and so on.
         </p>
 
         <div className="alert alert-warning alert-soft">
@@ -161,158 +161,168 @@ export default function Rules() {
 
         <h4 className="text-lg pt-3">ACTIONS</h4>
         <p>
-          There are five basic Actions a model may make in a turn: Move, Ranged Attack, Melee Attack,
-          Disengage, or Purge HEAT. You may perform actions in any order, and you may perform the same action
+          There are five basic Actions a model may make in a turn: <span className="text-title font-bold">Move</span>, <span className="text-title font-bold">Ranged Attack</span>, <span className="text-title font-bold">Melee Attack</span>,
+          <span className="text-title font-bold">Disengage</span>, or <span className="text-title font-bold">Purge HEAT</span>. You may perform actions in any order, and you may perform the same action
           twice.
         </p>
         <p>
-          You may perform Bolstered Actions in place of standard Actions, but they generate additional HEAT.
+          You may perform <span className="text-title font-bold">Bolstered Actions</span> in place of standard Actions, but they generate additional HEAT.
         </p>
 
         <h4 className="text-lg pt-3">GENERATE HEAT</h4>
         <p>After resolving all your actions, generate HEAT as follows:</p>
         <ul className="list-disc pl-6">
           <li>+1 HEAT if you performed a second action.</li>
-          <li>+1 HEAT for each Bolstered Action you performed.</li>
+          <li>+1 HEAT for each <span className="text-title font-bold">Bolstered Action</span> you performed.</li>
         </ul>
         <p className="italic pt-2">
-          <span className="font-semibold">Example:</span> Your Mech Activates and makes a Bolstered Move
-          Action, it follows up with a second Move Action. After resolving the movement, the model gains 1
-          HEAT for performing a Bolstered Action, and 1 HEAT for performing a second Action, for a total of 2
+          <span className="font-semibold">Example:</span> Your Mech Activates and makes a <span className="text-title font-bold">Bolstered Move</span>
+          Action, it follows up with a second <span className="text-title font-bold">Move</span> Action. After resolving the movement, the model gains 1
+          HEAT for performing a <span className="text-title font-bold">Bolstered Action</span>, and 1 HEAT for performing a second Action, for a total of 2
           HEAT.
         </p>
 
-        <h4 className="text-2xl pt-3">MOVE</h4>
-        <p>
-          Move the model a number of inches up to its Speed (S). Models may move through friendly units, but
-          must go around enemy units. You may pivot as much as you like, as often as you like, at any point
-          during your movement.
-        </p>
+        <div className="card-1 p-4">
+          <h4 className="text-2xl"><span className="text-title font-bold">MOVE</span></h4>
+          <p>
+            Move the model a number of inches up to its Speed (S). Models may move through friendly units, but
+            must go around enemy units. You may pivot as much as you like, as often as you like, at any point
+            during your movement.
+          </p>
 
-        <h4 className="text-lg pt-3">BOLSTERED MOVE</h4>
-        <p>Choose one:</p>
-        <ul className="list-disc pl-6">
-          <li>
-            <span className="font-semibold">Charge:</span> Move your model up to its (S), then make a free
-            Melee Action, or Ram within 1".
-          </li>
-          <li>
-            <span className="font-semibold">Run:</span> Move your model up to its (S), then move up to an
-            additional 3".
-          </li>
-          <li>
-            <span className="font-semibold">Snapshot:</span> Move your model up to its (S), but you may pause
-            at any time during the move to make a basic Ranged Attack, at -1 to the Combat Skill roll. After
-            resolving the attack, the model completes its movement.
-          </li>
-        </ul>
+          <h4 className="text-lg pt-3"><span className="text-title font-bold">BOLSTERED MOVE</span></h4>
+          <p>Choose one:</p>
+          <ul className="list-disc pl-6">
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Charge</span>:</span> Move your model up to its (S), then make a free
+              <span className="text-title font-bold">Melee Action</span>, or <span className="text-title font-bold">Ram</span> within 1".
+            </li>
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Run</span>:</span> Move your model up to its (S), then move up to an
+              additional 3".
+            </li>
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Snapshot</span>:</span> Move your model up to its (S), but you may
+              pause at any time during the move to make a basic <span className="text-title font-bold">Ranged Attack</span>, at -1 to the Combat Skill roll.
+              After resolving the attack, the model completes its movement.
+            </li>
+          </ul>
+        </div>
 
-        <h4 className="text-2xl pt-3">DISENGAGE</h4>
-        <p>
-          You may move out of combat at ½ Speed. The enemy may make a free Melee attack with a Melee Weapon.
-        </p>
+        <div className="card-1 p-4">
+          <h4 className="text-2xl"><span className="text-title font-bold">DISENGAGE</span></h4>
+          <p>
+            You may move out of combat at ½ Speed. The enemy may make a free <span className="text-title font-bold">Melee</span> attack with a Melee Weapon.
+          </p>
 
-        <h4 className="text-lg pt-3">BOLSTERED DISENGAGE</h4>
-        <ul className="list-disc pl-6">
-          <li>
-            <span className="font-semibold">Dodge:</span> You may move out of combat at ½ Speed. The enemy
-            Mech does not get a free Melee attack.
-          </li>
-        </ul>
+          <h4 className="text-lg pt-3">BOLSTERED DISENGAGE</h4>
+          <ul className="list-disc pl-6">
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Dodge</span>:</span> You may move out of combat at ½ Speed. The enemy
+              Mech does not get a free <span className="text-title font-bold">Melee</span> attack.
+            </li>
+          </ul>
+        </div>
 
-        <h4 className="text-2xl pt-3">RANGED ATTACK</h4>
-        <p>
-          Attack a model with a Ranged weapon not previously fired this turn. Roll equal to or greater than
-          your CS value on a single d6 to strike your target, dealing the damage listed on the weapon. Most
-          ranged weapons have no maximum range.
-        </p>
+        <div className="card-1 p-4">
+          <h4 className="text-2xl"><span className="text-title font-bold">RANGED ATTACK</span></h4>
+          <p>
+            Attack a model with a Ranged weapon not previously fired this turn. Roll equal to or greater than
+            your CS value on a single d6 to strike your target, dealing the damage listed on the weapon. Most
+            ranged weapons have no maximum range.
+          </p>
 
-        <h4 className="text-lg pt-3">BOLSTERED RANGED</h4>
-        <p>Choose One:</p>
-        <ul className="list-disc pl-6">
-          <li>
-            <span className="font-semibold">Unleash Hell:</span> Shoot all Ranged weapons equipped to the
-            model that have not previously fired this turn. Roll each attack separately.
-          </li>
-          <li>
-            <span className="font-semibold">Focused Fire:</span> Make an attack with a single Ranged weapon
-            not previously fired this turn and add +1 your CS roll.
-          </li>
-        </ul>
+          <h4 className="text-lg pt-3">BOLSTERED RANGED</h4>
+          <p>Choose One:</p>
+          <ul className="list-disc pl-6">
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Unleash Hell</span>:</span> Shoot all Ranged weapons equipped to the
+              model that have not previously fired this turn. Roll each attack separately.
+            </li>
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Focused Fire</span>:</span> Make an attack with a single Ranged weapon
+              not previously fired this turn and add +1 your CS roll.
+            </li>
+          </ul>
+        </div>
 
-        <h4 className="text-2xl pt-3">MELEE ATTACK</h4>
-        <p>
-          Attack a model with a Melee weapon not previously used this turn. Roll equal to or greater than your
-          CS value on a single d6 to strike your target, dealing the damage listed on the weapon.
-        </p>
+        <div className="card-1 p-4">
+          <h4 className="text-2xl"><span className="text-title font-bold">MELEE ATTACK</span></h4>
+          <p>
+            Attack a model with a Melee weapon not previously used this turn. Roll equal to or greater than
+            your CS value on a single d6 to strike your target, dealing the damage listed on the weapon.
+          </p>
 
-        <h4 className="text-lg pt-3">BOLSTERED MELEE</h4>
-        <p>Choose One:</p>
-        <ul className="list-disc pl-6">
-          <li>
-            <span className="font-semibold">Fury:</span> Attack with all Melee Weapons not previously used
-            this turn.
-          </li>
-          <li>
-            <span className="font-semibold">Focused Strike:</span> Make an attack with a single Melee weapon
-            not previously used this turn and add +1 to your CS roll.
-          </li>
-          <li>
-            <span className="font-semibold">Ram:</span> Deal 1d3 Damage to yourself, and 1d3 Damage to a model
-            within 1".
-          </li>
-        </ul>
+          <h4 className="text-lg pt-3">BOLSTERED MELEE</h4>
+          <p>Choose One:</p>
+          <ul className="list-disc pl-6">
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Fury</span>:</span> Attack with all Melee Weapons not previously used
+              this turn.
+            </li>
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Focused Strike</span>:</span> Make an attack with a single Melee weapon
+              not previously used this turn and add +1 to your CS roll.
+            </li>
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Ram</span>:</span> Deal 1d3 Damage to yourself, and 1d3 Damage to a
+              model within 1".
+            </li>
+          </ul>
+        </div>
 
-        <h4 className="text-2xl pt-3">PURGE HEAT</h4>
-        <p>
-          Remove d3 HEAT and gain Position Compromised. You may only perform this Action with the model once
-          per turn. You do not gain HEAT for this Action.
-        </p>
+        <div className="card-1 p-4">
+          <h4 className="text-2xl"><span className="text-title font-bold">PURGE HEAT</span></h4>
+          <p>
+            Remove d3 HEAT and gain <span className="text-title font-bold">Position Compromised</span>. You may only perform this Action with the model once
+            per turn. You do not gain HEAT for this Action.
+          </p>
 
-        <h4 className="text-lg pt-3">BOLSTERED PURGE</h4>
-        <ul className="list-disc pl-6">
-          <li>
-            <span className="font-semibold">Reboot:</span> Remove 2d3 HEAT. This must be the models only
-            Action for the turn. You do not gain any HEAT for this Action, nor do you gain Position
-            Compromised.
-          </li>
-        </ul>
+          <h4 className="text-lg pt-3">BOLSTERED PURGE</h4>
+          <ul className="list-disc pl-6">
+            <li>
+              <span className="font-semibold"><span className="text-title font-bold">Reboot</span>:</span> Remove 2d3 HEAT. This must be the models only
+              Action for the turn. You do not gain any HEAT for this Action, nor do you gain <span className="text-title font-bold">Position
+              Compromised</span>.
+            </li>
+          </ul>
+        </div>
 
         <div className="alert alert-info alert-soft">
           <p className="text-sm">
-            <span className="font-bold text-sm">re: POSITION COMPROMISED</span> Any model gains +1 CS on it's
-            next activation if targeting a model affected by Position Compromised. Remove Position Compromised
+            <span className="font-bold text-sm">re: <span className="text-title">POSITION COMPROMISED</span></span> Any model gains +1 CS on it's
+            next activation if targeting a model affected by <span className="text-title font-bold">Position Compromised</span>. Remove <span className="text-title font-bold">Position Compromised</span>
             after the attack resolves.
           </p>
         </div>
       </RulesSection>
 
       <RulesSection title="GAME MECHANICS">
-        <h4 className="text-lg pt-3">MOVEMENT</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">MOVEMENT</span></h4>
         <p>
           Models may move in any direction a number of inches equal to their Speed. Models may move vertically
           onto or over terrain at an additional move cost equal to the vertical distance.
         </p>
-        <p>Models may not move across gaps larger than 2". (VTOL ignores this rule).</p>
+        <p>Models may not move across gaps larger than 2". (<span className="text-title font-bold">VTOL</span> ignores this rule).</p>
         <p>
           A model may traverse onto terrain vertically within reason, but you must end your turn on a flat
           level.
         </p>
 
-        <h4 className="text-lg pt-3">FALLING</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">FALLING</span></h4>
         <p>
-          If a model falls, it is dealt 1 damage. VTOL ignores falling damage on a single d6 roll of a 3+.
+          If a model falls, it is dealt 1 damage. <span className="text-title font-bold">VTOL</span> ignores falling damage on a single d6 roll of a 3+.
         </p>
 
-        <h4 className="text-lg pt-3">COMBAT</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">COMBAT</span></h4>
         <p>
-          Models have 360 line of sight. Attackers must have line of sight to target a model or terrain.
+          Models have <span className="text-title font-bold">360 line of sight</span>. Attackers must have <span className="text-title font-bold">line of sight</span> to target a model or terrain.
           Ranged and Melee attacks are resolved with a d6 roll. Roll equal to or greater than your CS value to
           hit a target, dealing damage listed on the weapon.
         </p>
         <ul className="list-disc pl-6">
           <li>A roll of a 1 is always a miss.</li>
-          <li>A roll of 6 is always a Critical Hit.</li>
+          <li>A roll of 6 is always a <span className="text-title font-bold">Critical Hit</span>.</li>
         </ul>
         <p>
           The target then attempts an Armor (AR) roll to prevent the damage. Roll a separate d6 for each point
@@ -320,41 +330,41 @@ export default function Rules() {
           damage. For each unignored point of damage a model receives, reduce its HP by 1.
         </p>
         <p>
-          If a model is reduced to 0HP, it immediately makes an Explode Check (p.18) and is removed from play.
+          If a model is reduced to 0HP, it immediately makes an <span className="text-title font-bold">Explode Check</span> (p.18) and is removed from play.
         </p>
 
-        <h4 className="text-lg pt-3">LONG RANGE</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">LONG RANGE</span></h4>
         <p>If firing a Ranged Weapon 10" or more, modify your CS rolls by -1.</p>
 
-        <h4 className="text-lg pt-3">LINE OF SIGHT</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">LINE OF SIGHT</span></h4>
         <p>
-          If any part of a model can draw an unbroken line to any part of the target model, LOS is
+          If any part of a model can draw an unbroken line to any part of the target model, <span className="text-title font-bold">LOS</span> is
           established. If you are unsure, stoop down and get a model's eye view.
         </p>
 
-        <h4 className="text-lg pt-3">COVER</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">COVER</span></h4>
         <p>
-          If line of sight is partially obscured by either terrain or models while making a Ranged Attack, the
+          If <span className="text-title font-bold">line of sight</span> is partially obscured by either terrain or models while making a <span className="text-title font-bold">Ranged Attack</span>, the
           targets AR is increased by +1 for the attack.
         </p>
 
-        <h4 className="text-lg pt-3">ENGAGED</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">ENGAGED</span></h4>
         <p>
-          If you are within 1" of an enemy model, you are considered Engaged. You may not take Move or Ranged
-          Attack actions while Engaged.
+          If you are within 1" of an enemy model, you are considered <span className="text-title font-bold">Engaged</span>. You may not take <span className="text-title font-bold">Move</span> or <span className="text-title font-bold">Ranged
+          Attack</span> actions while <span className="text-title font-bold">Engaged</span>.
         </p>
-        <p>You use the Disengage Action to get away.</p>
+        <p>You use the <span className="text-title font-bold">Disengage</span> Action to get away.</p>
 
-        <h4 className="text-lg pt-3">CRITICAL HITS</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">CRITICAL HITS</span></h4>
         <p>
-          When you use an Attack Action, a die roll of 6 is always a Critical Hit. The damage is increased by
-          +1. Then roll to see if there is Catastrophic Damage (p.17).
+          When you use an Attack Action, a die roll of 6 is always a <span className="text-title font-bold">Critical Hit</span>. The damage is increased by
+          +1. Then roll to see if there is <span className="text-title font-bold">Catastrophic Damage</span> (p.17).
         </p>
 
-        <h4 className="text-lg pt-3">CATASTROPHIC DAMAGE</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">CATASTROPHIC DAMAGE</span></h4>
         <p>
-          When you score a Critical Hit, roll another d6. If you meet or exceed your model's CS, you have
-          caused Catastrophic Damage! Roll 2d6 on the Catastrophic Damage table and apply the results to the
+          When you score a <span className="text-title font-bold">Critical Hit</span>, roll another d6. If you meet or exceed your model's CS, you have
+          caused <span className="text-title font-bold">Catastrophic Damage</span>! Roll 2d6 on the <span className="text-title font-bold">Catastrophic Damage</span> table and apply the results to the
           target model. This is in addition to the +1 damage. All effects are temporary and last until the end
           of the game.
         </p>
@@ -369,57 +379,57 @@ export default function Rules() {
           <tbody>
             <tr>
               <td className="font-semibold">2</td>
-              <td className="font-semibold">Ammo Explodes</td>
+              <td className="font-semibold"><span className="text-title font-bold">Ammo Explodes</span></td>
               <td>Deal d3 additional damage. If the model has special ammo, it is lost.</td>
             </tr>
             <tr>
               <td className="font-semibold">3</td>
-              <td className="font-semibold">Platform Disabled</td>
+              <td className="font-semibold"><span className="text-title font-bold">Platform Disabled</span></td>
               <td>A random platform is disabled.</td>
             </tr>
             <tr>
               <td className="font-semibold">4</td>
-              <td className="font-semibold">Targeting System Disrupted</td>
+              <td className="font-semibold"><span className="text-title font-bold">Targeting System Disrupted</span></td>
               <td>-1 CS.</td>
             </tr>
             <tr>
               <td className="font-semibold">5</td>
-              <td className="font-semibold">Cracked Reactor Core</td>
-              <td>HEAT Limit reduced by 1.</td>
+              <td className="font-semibold"><span className="text-title font-bold">Cracked Reactor Core</span></td>
+              <td><span className="text-title font-bold">HEAT Limit</span> reduced by 1.</td>
             </tr>
             <tr>
               <td className="font-semibold">6</td>
-              <td className="font-semibold">Ricochet</td>
+              <td className="font-semibold"><span className="text-title font-bold">Ricochet</span></td>
               <td>Deal 1 damage to a random model within 3".</td>
             </tr>
             <tr>
               <td className="font-semibold">7</td>
-              <td className="font-semibold">Heavy Fire</td>
+              <td className="font-semibold"><span className="text-title font-bold">Heavy Fire</span></td>
               <td>+1 Damage.</td>
             </tr>
             <tr>
               <td className="font-semibold">8</td>
-              <td className="font-semibold">Leaking Hydraulics</td>
+              <td className="font-semibold"><span className="text-title font-bold">Leaking Hydraulics</span></td>
               <td>-1 S.</td>
             </tr>
             <tr>
               <td className="font-semibold">9</td>
-              <td className="font-semibold">Armor Compromised</td>
-              <td>All models firing against this model gain Armor Penetration.</td>
+              <td className="font-semibold"><span className="text-title font-bold">Armor Compromised</span></td>
+              <td>All models firing against this model gain <span className="text-title font-bold">Armor Penetration</span>.</td>
             </tr>
             <tr>
               <td className="font-semibold">10</td>
-              <td className="font-semibold">Oil Burn</td>
-              <td>HEAT Limit reduced by 1.</td>
+              <td className="font-semibold"><span className="text-title font-bold">Oil Burn</span></td>
+              <td><span className="text-title font-bold">HEAT Limit</span> reduced by 1.</td>
             </tr>
             <tr>
               <td className="font-semibold">11</td>
-              <td className="font-semibold">Weapon Disabled</td>
+              <td className="font-semibold"><span className="text-title font-bold">Weapon Disabled</span></td>
               <td>A random weapon is disabled.</td>
             </tr>
             <tr>
               <td className="font-semibold">12</td>
-              <td className="font-semibold">Cockpit Fire</td>
+              <td className="font-semibold"><span className="text-title font-bold">Cockpit Fire</span></td>
               <td>Model is reduced to 0HP.</td>
             </tr>
           </tbody>
@@ -428,18 +438,18 @@ export default function Rules() {
 
       <RulesSection title="HEAT">
         <p>
-          Mechs generate immense HEAT while performing their duties in battle. This can occur when performing
-          certain actions, and also when making HEAT checks at the end of a Round.
+          Mechs generate immense <span className="text-title font-bold">HEAT</span> while performing their duties in battle. This can occur when performing
+          certain actions, and also when making <span className="text-title font-bold">HEAT checks</span> at the end of a <span className="text-title font-bold">Round</span>.
         </p>
-        <p>Performing a second Action or any Bolstered Action accrues +1 HEAT.</p>
+        <p>Performing a second Action or any <span className="text-title font-bold">Bolstered Action</span> accrues +1 <span className="text-title font-bold">HEAT</span>.</p>
         <p>
-          HEAT is applied after all of a model's actions are resolved. If a model reaches or exceeds its HEAT
-          Limit, it is immediately reduced to 0 HP.
+          <span className="text-title font-bold">HEAT</span> is applied after all of a model's actions are resolved. If a model reaches or exceeds its <span className="text-title font-bold">HEAT
+          Limit</span>, it is immediately reduced to 0 HP.
         </p>
 
-        <h4 className="text-lg pt-3">HEAT CHECK</h4>
+        <h4 className="text-lg pt-3"><span className="text-title font-bold">HEAT CHECK</span></h4>
         <p>
-          When a model is selected during the HEAT Phase, roll a d6 and consult the HEAT Check chart below.
+          When a model is selected during the <span className="text-title font-bold">HEAT Phase</span>, roll a d6 and consult the <span className="text-title font-bold">HEAT Check</span> chart below.
         </p>
         <table className="table">
           <thead>
