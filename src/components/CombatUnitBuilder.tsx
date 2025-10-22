@@ -1,38 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import { Mech, BASE_MECH_COST, BASE_MECH_STATS, calculateMechCost, formatCredits } from "@/lib/game-data";
+import React from "react";
+import { Mech, calculateMechCost, formatCredits } from "@/lib/game-data";
+import { useMechStore } from "@/lib/mechStore";
 import { MechBuilder } from "./MechBuilder";
 
 export function CombatUnitBuilder() {
-  const [mechs, setMechs] = useState<Mech[]>([]);
+  const { mechs, addMech, updateMech, removeMech, setMechs } = useMechStore();
 
-  const addMech = () => {
-    const newMech: Mech = {
-      id: `mech-${Date.now()}`,
-      callSign: `Mech ${mechs.length + 1}`,
-      baseCost: BASE_MECH_COST,
-      stats: { ...BASE_MECH_STATS },
-      upgrades: [],
-      rangedWeapons: [],
-      meleeWeapons: [],
-    };
-    setMechs([...mechs, newMech]);
-  };
-
-  const updateMech = (index: number, updatedMech: Mech) => {
-    const newMechs = [...mechs];
-    newMechs[index] = updatedMech;
-    setMechs(newMechs);
-  };
-
-  const removeMech = (index: number) => {
-    const newMechs = [...mechs];
-    newMechs.splice(index, 1);
-    setMechs(newMechs);
-  };
-
-  const totalCredits = mechs.reduce((sum, mech) => sum + calculateMechCost(mech), 0);
+  const totalCredits = mechs.reduce((sum: number, mech: Mech) => sum + calculateMechCost(mech), 0);
 
   const exportToJson = () => {
     const dataStr = JSON.stringify(mechs, null, 2);
@@ -65,32 +41,27 @@ export function CombatUnitBuilder() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Summary Bar */}
-        <div className="bg-slate-900 border-2 border-amber-600 rounded-lg p-6 mb-6">
+        <div className="card-1 mb-4">
           <div className="flex flex-wrap justify-between items-center gap-4">
             <div>
-              <div className="text-amber-400 font-bold text-sm">MECHS IN UNIT</div>
-              <div className="text-white text-3xl font-bold">{mechs.length}</div>
+              <div className="text-primary font-bold text-sm">MECHS IN UNIT</div>
+              <div className="text-3xl font-bold">{mechs.length}</div>
             </div>
             <div>
-              <div className="text-amber-400 font-bold text-sm">TOTAL CREDITS</div>
-              <div className="text-white text-3xl font-bold">{formatCredits(totalCredits)}</div>
+              <div className="text-primary font-bold text-sm">TOTAL CREDITS</div>
+              <div className="text-3xl font-bold">{formatCredits(totalCredits)}</div>
             </div>
             <div className="flex gap-3">
-              <button
-                onClick={addMech}
-                className="bg-amber-600 hover:bg-amber-700 text-black px-6 py-3 rounded-lg font-bold text-lg">
+              <button onClick={addMech} className="btn btn-success">
                 + Add Mech
               </button>
-              <button
-                onClick={exportToJson}
-                disabled={mechs.length === 0}
-                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-6 py-3 rounded-lg font-bold">
+              <button onClick={exportToJson} disabled={mechs.length === 0} className="btn btn-info">
                 Export
               </button>
-              <label className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold cursor-pointer inline-block">
+              <label className="btn btn-info">
                 Import
                 <input type="file" accept=".json" onChange={importFromJson} className="hidden" />
               </label>
@@ -99,8 +70,8 @@ export function CombatUnitBuilder() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-slate-900 border border-amber-600 rounded-lg p-4 mb-6">
-          <div className="text-amber-400 font-bold mb-2">Quick Guide</div>
+        {/* <div className="card-1 mb-4">
+          <div className="text-primary font-bold mb-2">Quick Guide</div>
           <ul className="text-gray-300 text-sm space-y-1">
             <li>• Each Mech costs $50,000 base</li>
             <li>• All Mechs start with 4 Platform slots (max 8 with upgrades)</li>
@@ -108,7 +79,7 @@ export function CombatUnitBuilder() {
             <li>• Some upgrades are stackable (can be equipped multiple times)</li>
             <li>• Use the dropdowns to add equipment to each mech</li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Mechs List */}
         {mechs.length === 0 ? (
@@ -132,12 +103,6 @@ export function CombatUnitBuilder() {
             ))}
           </div>
         )}
-
-        {/* Footer */}
-        <div className="mt-12 text-center text-gray-500 text-sm">
-          <p>Flames of Orion Mech List Builder</p>
-          <p className="mt-1">Build and customize your combat unit with mechs, weapons, and upgrades</p>
-        </div>
       </div>
     </div>
   );

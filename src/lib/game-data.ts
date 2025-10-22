@@ -469,5 +469,5 @@ export function calculateModifiedStats(mech: Mech): MechStats {
 }
 
 export function formatCredits(amount: number): string {
-  return `$${amount.toLocaleString()}`;
+  return `₡${amount.toLocaleString()}`;
 }

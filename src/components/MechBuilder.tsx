@@ -96,98 +96,60 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
     onUpdate({ ...mech, meleeWeapons: newWeapons });
   };
 
+  const hasPlatformCapacity = usedPlatforms < totalPlatforms;
+
   return (
-    <div className="border-2 border-amber-600 bg-slate-900 p-6 rounded-lg">
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
-          <label className="block text-amber-400 font-bold mb-2">Call Sign</label>
-          <input
-            type="text"
-            value={mech.callSign}
-            onChange={(e) => updateCallSign(e.target.value)}
-            className="bg-slate-800 border border-amber-600 text-white px-3 py-2 rounded w-full max-w-md"
-            placeholder="Enter mech call sign..."
-          />
-        </div>
-        <button
-          onClick={onRemove}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-bold ml-4">
+    <div className="card-1 space-y-4">
+      <div className="flex items-center gap-4 mb-4">
+        <input
+          type="text"
+          value={mech.callSign}
+          onChange={(e) => updateCallSign(e.target.value)}
+          className="input input-lg w-full"
+          placeholder="Enter mech call sign..."
+        />
+        <div className="text-2xl font-bold">{formatCredits(totalCost)}</div>
+        <button onClick={onRemove} className="btn btn-error">
           Remove Mech
         </button>
       </div>
 
       {/* Stats Display */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6 p-4 bg-slate-800 rounded">
-        <div>
-          <div className="text-amber-400 font-bold text-xs">SPEED</div>
-          <div className="text-white text-lg">{stats.speed}&quot;</div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
+        <div className="bg-base-100 p-2 rounded">
+          <div className="text-primary font-bold text-xs">SPEED</div>
+          <div className="text-2xl text-title">{stats.speed}&quot;</div>
         </div>
-        <div>
-          <div className="text-amber-400 font-bold text-xs">COMBAT SKILL</div>
-          <div className="text-white text-lg">{stats.combatSkill}</div>
+        <div className="bg-base-100 p-2 rounded">
+          <div className="text-primary font-bold text-xs">COMBAT SKILL</div>
+          <div className="text-2xl text-title">{stats.combatSkill}</div>
         </div>
-        <div>
-          <div className="text-amber-400 font-bold text-xs">ARMOR</div>
-          <div className="text-white text-lg">{stats.armor}</div>
+        <div className="bg-base-100 p-2 rounded">
+          <div className="text-primary font-bold text-xs">ARMOR</div>
+          <div className="text-2xl text-title">{stats.armor}</div>
         </div>
-        <div>
-          <div className="text-amber-400 font-bold text-xs">HULL POINTS</div>
-          <div className="text-white text-lg">{stats.hullPoints}</div>
+        <div className="bg-base-100 p-2 rounded">
+          <div className="text-primary font-bold text-xs">HULL POINTS</div>
+          <div className="text-2xl text-title">{stats.hullPoints}</div>
         </div>
-        <div>
-          <div className="text-amber-400 font-bold text-xs">HEAT LIMIT</div>
-          <div className="text-white text-lg">{stats.heatLimit}</div>
+        <div className="bg-base-100 p-2 rounded">
+          <div className="text-primary font-bold text-xs">HEAT LIMIT</div>
+          <div className="text-2xl text-title">{stats.heatLimit}</div>
         </div>
-        <div>
-          <div className="text-amber-400 font-bold text-xs">PLATFORMS</div>
-          <div className="text-white text-lg">
+        <div className="bg-base-100 p-2 rounded">
+          <div className="text-primary font-bold text-xs">PLATFORMS</div>
+          <div className="text-2xl text-title">
             {usedPlatforms}/{totalPlatforms}
           </div>
         </div>
       </div>
 
       {/* Cost Display */}
-      <div className="mb-6 p-4 bg-slate-800 rounded">
-        <div className="text-amber-400 font-bold">Total Cost</div>
-        <div className="text-white text-2xl font-bold">{formatCredits(totalCost)}</div>
-      </div>
 
       <div className="grid md:grid-cols-3 gap-6">
         {/* Upgrades */}
         <div>
-          <h3 className="text-amber-400 font-bold text-lg mb-3">Upgrades</h3>
-
-          {/* Equipped Upgrades */}
-          <div className="mb-4 space-y-2">
-            {mech.upgrades.map((upgradeId, index) => {
-              const upgrade = getUpgradeById(upgradeId);
-              if (!upgrade) return null;
-              return (
-                <div key={`${upgradeId}-${index}`} className="bg-slate-800 p-2 rounded text-sm">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <div className="text-white font-bold">{upgrade.name}</div>
-                      <div className="text-amber-400 text-xs">
-                        {formatCredits(upgrade.cost)}
-                        {upgrade.platformSlots === 0 && " (No PF)"}
-                        {upgrade.platformSlots &&
-                          upgrade.platformSlots > 1 &&
-                          ` (${upgrade.platformSlots} PF)`}
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => removeUpgrade(index)}
-                      className="text-red-400 hover:text-red-300 ml-2">
-                      ✕
-                    </button>
-                  </div>
-                  <div className="text-gray-400 text-xs mt-1">{upgrade.description}</div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Add Upgrade */}
+          <h3 className="text-primary font-bold text-lg mb-2">UPGRADES</h3>
           <select
             onChange={(e) => {
               if (e.target.value) {
@@ -195,7 +157,7 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
                 e.target.value = "";
               }
             }}
-            className="bg-slate-800 border border-amber-600 text-white px-3 py-2 rounded w-full text-sm">
+            className="select mb-2">
             <option value="">+ Add Upgrade</option>
             {UPGRADES.map((upgrade) => (
               <option key={upgrade.id} value={upgrade.id}>
@@ -203,30 +165,71 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
               </option>
             ))}
           </select>
+          {/* Equipped Upgrades */}
+          <div className="mb-4 space-y-2">
+            {mech.upgrades.map((upgradeId, index) => {
+              const upgrade = getUpgradeById(upgradeId);
+              if (!upgrade) return null;
+              return (
+                <div key={`${upgradeId}-${index}`} className="card-small text-sm">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <div className="font-bold">{upgrade.name}</div>
+                      <div className="text-primary text-xs">
+                        {formatCredits(upgrade.cost)}
+                        {upgrade.platformSlots === 0 && " (No PF)"}
+                        {upgrade.platformSlots &&
+                          upgrade.platformSlots > 1 &&
+                          ` (${upgrade.platformSlots} PF)`}
+                      </div>
+                    </div>
+                    <button onClick={() => removeUpgrade(index)} className="btn btn-error btn-circle btn-xs">
+                      ✕
+                    </button>
+                  </div>
+                  <div className="opacity-80 text-xs mt-1">{upgrade.description}</div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Ranged Weapons */}
         <div>
-          <h3 className="text-amber-400 font-bold text-lg mb-3">Ranged Weapons</h3>
-
+          <h3 className="text-primary font-bold text-lg mb-2">RANGED WEAPONS</h3>
+          <select
+            onChange={(e) => {
+              if (e.target.value) {
+                addRangedWeapon(e.target.value);
+                e.target.value = "";
+              }
+            }}
+            className="select mb-2">
+            <option value="">+ Add Ranged Weapon</option>
+            {RANGED_WEAPONS.map((weapon) => (
+              <option key={weapon.id} value={weapon.id}>
+                {weapon.name} - {formatCredits(weapon.cost)} (DMG: {weapon.damage})
+              </option>
+            ))}
+          </select>
           {/* Equipped Ranged Weapons */}
           <div className="mb-4 space-y-2">
             {mech.rangedWeapons.map((weaponId, index) => {
               const weapon = getRangedWeaponById(weaponId);
               if (!weapon) return null;
               return (
-                <div key={`${weaponId}-${index}`} className="bg-slate-800 p-2 rounded text-sm">
+                <div key={`${weaponId}-${index}`} className="card-small text-sm">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <div className="text-white font-bold">{weapon.name}</div>
-                      <div className="text-amber-400 text-xs">
+                      <div className="font-bold">{weapon.name}</div>
+                      <div className="text-primary text-xs">
                         {formatCredits(weapon.cost)} | DMG: {weapon.damage}
                         {weapon.platformSlots && weapon.platformSlots > 1 && ` (${weapon.platformSlots} PF)`}
                       </div>
                     </div>
                     <button
                       onClick={() => removeRangedWeapon(index)}
-                      className="text-red-400 hover:text-red-300 ml-2">
+                      className="btn btn-error btn-circle btn-xs">
                       ✕
                     </button>
                   </div>
@@ -236,46 +239,43 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
               );
             })}
           </div>
+        </div>
 
-          {/* Add Ranged Weapon */}
+        {/* Melee Weapons */}
+        <div>
+          <h3 className="text-primary font-bold text-lg mb-2">MELEE WEAPONS</h3>
           <select
             onChange={(e) => {
               if (e.target.value) {
-                addRangedWeapon(e.target.value);
+                addMeleeWeapon(e.target.value);
                 e.target.value = "";
               }
             }}
-            className="bg-slate-800 border border-amber-600 text-white px-3 py-2 rounded w-full text-sm">
-            <option value="">+ Add Ranged Weapon</option>
-            {RANGED_WEAPONS.map((weapon) => (
+            className="select mb-2">
+            <option value="">+ Add Melee Weapon</option>
+            {MELEE_WEAPONS.map((weapon) => (
               <option key={weapon.id} value={weapon.id}>
                 {weapon.name} - {formatCredits(weapon.cost)} (DMG: {weapon.damage})
               </option>
             ))}
           </select>
-        </div>
-
-        {/* Melee Weapons */}
-        <div>
-          <h3 className="text-amber-400 font-bold text-lg mb-3">Melee Weapons</h3>
-
           {/* Equipped Melee Weapons */}
           <div className="mb-4 space-y-2">
             {mech.meleeWeapons.map((weaponId, index) => {
               const weapon = getMeleeWeaponById(weaponId);
               if (!weapon) return null;
               return (
-                <div key={`${weaponId}-${index}`} className="bg-slate-800 p-2 rounded text-sm">
+                <div key={`${weaponId}-${index}`} className="card-small text-sm">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <div className="text-white font-bold">{weapon.name}</div>
-                      <div className="text-amber-400 text-xs">
+                      <div className="font-bold">{weapon.name}</div>
+                      <div className="text-primary text-xs">
                         {formatCredits(weapon.cost)} | DMG: {weapon.damage}
                       </div>
                     </div>
                     <button
                       onClick={() => removeMeleeWeapon(index)}
-                      className="text-red-400 hover:text-red-300 ml-2">
+                      className="btn btn-error btn-circle btn-xs">
                       ✕
                     </button>
                   </div>
@@ -285,23 +285,6 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
               );
             })}
           </div>
-
-          {/* Add Melee Weapon */}
-          <select
-            onChange={(e) => {
-              if (e.target.value) {
-                addMeleeWeapon(e.target.value);
-                e.target.value = "";
-              }
-            }}
-            className="bg-slate-800 border border-amber-600 text-white px-3 py-2 rounded w-full text-sm">
-            <option value="">+ Add Melee Weapon</option>
-            {MELEE_WEAPONS.map((weapon) => (
-              <option key={weapon.id} value={weapon.id}>
-                {weapon.name} - {formatCredits(weapon.cost)} (DMG: {weapon.damage})
-              </option>
-            ))}
-          </select>
         </div>
       </div>
     </div>

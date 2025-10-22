@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@plugin "daisyui";
+@plugin "daisyui" {
+}
 
 :root {
   --font-title: "Wallpoet", system-ui, sans-serif;
@@ -15,7 +16,6 @@
 @layer base {
   body {
     font-family: var(--font-body);
-    @apply bg-slate-950;
   }
 
   h1,
@@ -29,7 +29,11 @@
 }
 
 .card-1 {
-  @apply card bg-base-200 shadow-sm;
+  @apply card bg-base-200 shadow-sm p-4;
+}
+
+.card-small {
+  @apply bg-base-100 rounded shadow-sm p-2;
 }
 
 /* Custom scrollbar for dark theme */
