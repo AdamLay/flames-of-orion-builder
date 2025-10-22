@@ -3,9 +3,12 @@
 import React from "react";
 import {
   Mech,
+  FrameType,
+  FRAME_PROFILES,
   UPGRADES,
   RANGED_WEAPONS,
   MELEE_WEAPONS,
+  getFrameProfileById,
   getUpgradeById,
   getRangedWeaponById,
   getMeleeWeaponById,
@@ -30,6 +33,10 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
 
   const updateCallSign = (callSign: string) => {
     onUpdate({ ...mech, callSign });
+  };
+
+  const updateFrameType = (frameType: FrameType) => {
+    onUpdate({ ...mech, frameType });
   };
 
   const addUpgrade = (upgradeId: string) => {
@@ -108,6 +115,16 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
           className="input input-lg w-full"
           placeholder="Enter mech call sign..."
         />
+        <select
+          value={mech.frameType}
+          onChange={(e) => updateFrameType(e.target.value as FrameType)}
+          className="select select-lg">
+          {FRAME_PROFILES.map((frame) => (
+            <option key={frame.id} value={frame.id}>
+              {frame.name}
+            </option>
+          ))}
+        </select>
         <div className="text-2xl font-bold">{formatCredits(totalCost)}</div>
         <button onClick={onRemove} className="btn btn-error">
           Remove Mech

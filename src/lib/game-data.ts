@@ -1,5 +1,14 @@
 // Flames of Orion - Game Data and Types
 
+export type FrameType = "light" | "medium" | "heavy";
+
+export interface FrameProfile {
+  id: FrameType;
+  name: string;
+  description: string;
+  baseStats: MechStats;
+}
+
 export interface MechStats {
   speed: number;
   combatSkill: string;
@@ -43,6 +52,7 @@ export interface Mech {
   id: string;
   callSign: string;
   baseCost: number;
+  frameType: FrameType;
   stats: MechStats;
   upgrades: string[]; // Array of upgrade IDs
   rangedWeapons: string[]; // Array of ranged weapon IDs
@@ -60,6 +70,49 @@ export const BASE_MECH_STATS: MechStats = {
 };
 
 export const BASE_MECH_COST = 50000;
+
+// Frame Profiles
+export const FRAME_PROFILES: FrameProfile[] = [
+  {
+    id: "light",
+    name: "Light Frame",
+    description: "Faster and more HEAT efficient but more susceptible to damage.",
+    baseStats: {
+      speed: 7,
+      combatSkill: "4+",
+      armor: "6+",
+      hullPoints: 4,
+      heatLimit: 12,
+      platforms: 3,
+    },
+  },
+  {
+    id: "medium",
+    name: "Medium Frame",
+    description: "The baseline chassis. A good mix of speed, armor, and HEAT efficiency.",
+    baseStats: {
+      speed: 6,
+      combatSkill: "4+",
+      armor: "6+",
+      hullPoints: 6,
+      heatLimit: 10,
+      platforms: 4,
+    },
+  },
+  {
+    id: "heavy",
+    name: "Heavy Frame",
+    description: "More durable but slower with poor HEAT control.",
+    baseStats: {
+      speed: 5,
+      combatSkill: "4+",
+      armor: "5+",
+      hullPoints: 7,
+      heatLimit: 9,
+      platforms: 5,
+    },
+  },
+];
 
 // Upgrades
 export const UPGRADES: Upgrade[] = [
@@ -361,6 +414,10 @@ export const MELEE_WEAPONS: MeleeWeapon[] = [
 ];
 
 // Helper functions
+export function getFrameProfileById(id: FrameType): FrameProfile | undefined {
+  return FRAME_PROFILES.find((f) => f.id === id);
+}
+
 export function getUpgradeById(id: string): Upgrade | undefined {
   return UPGRADES.find((u) => u.id === id);
 }
@@ -422,7 +479,8 @@ export function calculateUsedPlatforms(mech: Mech): number {
 }
 
 export function calculateTotalPlatforms(mech: Mech): number {
-  let total = BASE_MECH_STATS.platforms;
+  const frameProfile = getFrameProfileById(mech.frameType);
+  let total = frameProfile ? frameProfile.baseStats.platforms : BASE_MECH_STATS.platforms;
 
   // Count Extra Platforms upgrades
   const extraPlatformsCount = mech.upgrades.filter((id) => id === "extra-platforms").length;
@@ -433,7 +491,8 @@ export function calculateTotalPlatforms(mech: Mech): number {
 }
 
 export function calculateModifiedStats(mech: Mech): MechStats {
-  const stats = { ...BASE_MECH_STATS };
+  const frameProfile = getFrameProfileById(mech.frameType);
+  const stats = frameProfile ? { ...frameProfile.baseStats } : { ...BASE_MECH_STATS };
 
   // Apply upgrade modifications
   mech.upgrades.forEach((upgradeId) => {

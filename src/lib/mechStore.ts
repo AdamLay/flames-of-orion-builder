@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { Mech, BASE_MECH_COST, BASE_MECH_STATS } from "./game-data";
+import { Mech, FrameType, BASE_MECH_COST, BASE_MECH_STATS } from "./game-data";
 
 interface MechStoreState {
   mechs: Mech[];
@@ -20,6 +20,7 @@ export const useMechStore = create<MechStoreState>()(
             id: `mech-${Date.now()}`,
             callSign: `Mech ${state.mechs.length + 1}`,
             baseCost: BASE_MECH_COST,
+            frameType: "medium",
             stats: { ...BASE_MECH_STATS },
             upgrades: [],
             rangedWeapons: [],
