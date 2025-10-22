@@ -39,25 +39,13 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
   const totalCost = calculateMechCost(mech);
   const usedPlatforms = calculateUsedPlatforms(mech);
   const totalPlatforms = calculateTotalPlatforms(mech);
-
+  console.log("mech", mech);
   const updateCallSign = (callSign: string) => {
     onUpdate({ ...mech, callSign });
   };
 
   const updateFrameType = (frameType: FrameType) => {
     onUpdate({ ...mech, frameType });
-  };
-
-  const addWeaponAmmo = (weaponIndex: number, ammoId: string) => {
-    const newWeaponAmmo = { ...mech.weaponAmmo };
-    newWeaponAmmo[weaponIndex] = ammoId;
-    onUpdate({ ...mech, weaponAmmo: newWeaponAmmo });
-  };
-
-  const removeWeaponAmmo = (weaponIndex: number) => {
-    const newWeaponAmmo = { ...mech.weaponAmmo };
-    delete newWeaponAmmo[weaponIndex];
-    onUpdate({ ...mech, weaponAmmo: newWeaponAmmo });
   };
 
   const addUpgrade = (upgradeId: string) => {
@@ -86,6 +74,8 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
     onUpdate({ ...mech, upgrades: newUpgrades });
   };
 
+  //#region Ranged Weapons
+
   const addRangedWeapon = (weaponId: string) => {
     const weapon = getRangedWeaponById(weaponId);
     if (!weapon) return;
@@ -102,8 +92,24 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
   const removeRangedWeapon = (index: number) => {
     const newWeapons = [...mech.rangedWeapons];
     newWeapons.splice(index, 1);
-    onUpdate({ ...mech, rangedWeapons: newWeapons });
+    const newWeaponAmmo = { ...mech.weaponAmmo };
+    delete newWeaponAmmo[index];
+    onUpdate({ ...mech, rangedWeapons: newWeapons, weaponAmmo: newWeaponAmmo });
   };
+
+  const addWeaponAmmo = (weaponIndex: number, ammoId: string) => {
+    const newWeaponAmmo = { ...mech.weaponAmmo };
+    newWeaponAmmo[weaponIndex] = ammoId;
+    onUpdate({ ...mech, weaponAmmo: newWeaponAmmo });
+  };
+
+  const removeWeaponAmmo = (weaponIndex: number) => {
+    const newWeaponAmmo = { ...mech.weaponAmmo };
+    delete newWeaponAmmo[weaponIndex];
+    onUpdate({ ...mech, weaponAmmo: newWeaponAmmo });
+  };
+
+  //#endregion
 
   const addMeleeWeapon = (weaponId: string) => {
     const weapon = getMeleeWeaponById(weaponId);
@@ -123,8 +129,6 @@ export function MechBuilder({ mech, onUpdate, onRemove }: MechBuilderProps) {
     newWeapons.splice(index, 1);
     onUpdate({ ...mech, meleeWeapons: newWeapons });
   };
-
-  const hasPlatformCapacity = usedPlatforms < totalPlatforms;
 
   return (
     <div className="card-1 space-y-4">
