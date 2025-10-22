@@ -58,13 +58,13 @@ export function CombatUnitBuilder() {
               <button onClick={addMech} className="btn btn-success">
                 + Add Mech
               </button>
-              <button onClick={exportToJson} disabled={mechs.length === 0} className="btn btn-info">
+              {/* <button onClick={exportToJson} disabled={mechs.length === 0} className="btn btn-info">
                 Export
               </button>
               <label className="btn btn-info">
                 Import
                 <input type="file" accept=".json" onChange={importFromJson} className="hidden" />
-              </label>
+              </label> */}
             </div>
           </div>
         </div>
@@ -83,11 +83,9 @@ export function CombatUnitBuilder() {
 
         {/* Mechs List */}
         {mechs.length === 0 ? (
-          <div className="bg-slate-900 border-2 border-dashed border-amber-600 rounded-lg p-12 text-center">
+          <div className="card-1  p-12 text-center">
             <div className="text-gray-400 text-xl mb-4">No mechs in your combat unit yet</div>
-            <button
-              onClick={addMech}
-              className="bg-amber-600 hover:bg-amber-700 text-black px-8 py-4 rounded-lg font-bold text-lg">
+            <button onClick={addMech} className="btn btn-success btn-lg self-center">
               + Add Your First Mech
             </button>
           </div>
