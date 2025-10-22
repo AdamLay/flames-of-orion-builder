@@ -1,4 +1,4 @@
-import { CombatUnitBuilder } from "@/components/CombatUnitBuilder";
+import { BunkerManager } from "@/components/BunkerManager";
 import MenuBar from "@/components/MenuBar";
 
 export default function Home() {
@@ -6,7 +6,7 @@ export default function Home() {
     <main className="min-h-screen max-w-4xl mx-auto flex flex-col">
       <MenuBar />
 
-      <CombatUnitBuilder />
+      <BunkerManager />
     </main>
   );
 }

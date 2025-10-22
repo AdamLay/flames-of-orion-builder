@@ -67,6 +67,23 @@ export interface Mech {
   weaponAmmo: Record<number, string>; // Maps ranged weapon index to ammo ID
 }
 
+export type VehicleType = "mech" | "ground-vehicle" | "aircraft" | "infantry";
+
+export interface BunkerBay {
+  id: string;
+  content: {
+    type: VehicleType;
+    ids: string[]; // IDs of mechs/vehicles in this bay
+  } | null;
+}
+
+export interface Bunker {
+  id: string;
+  bays: BunkerBay[];
+  credits: number;
+  name: string;
+}
+
 // Base Mech Stats
 export const BASE_MECH_STATS: MechStats = {
   speed: 6,
@@ -78,6 +95,23 @@ export const BASE_MECH_STATS: MechStats = {
 };
 
 export const BASE_MECH_COST = 0;
+
+// Bunker Constants
+export const BUNKER_STARTING_CREDITS = 150000;
+export const BUNKER_STARTING_MECHS = 4;
+export const BUNKER_TOTAL_BAYS = 6;
+
+// Bay capacity rules:
+// 1 Mech per bay, OR
+// 2 ground vehicles per bay, OR
+// 2 aircraft per bay, OR
+// 3 infantry per bay
+export const BAY_CAPACITY = {
+  mech: 1,
+  "ground-vehicle": 2,
+  aircraft: 2,
+  infantry: 3,
+};
 
 // Frame Profiles
 export const FRAME_PROFILES: FrameProfile[] = [
@@ -591,4 +625,44 @@ export function calculateModifiedStats(mech: Mech): MechStats {
 
 export function formatCredits(amount: number): string {
   return `₡${amount.toLocaleString()}`;
+}
+
+// Bunker Helper Functions
+export function createEmptyBunker(name: string = "My Bunker"): Bunker {
+  const bays: BunkerBay[] = Array.from({ length: BUNKER_TOTAL_BAYS }, (_, i) => ({
+    id: `bay-${i}`,
+    content: null,
+  }));
+
+  return {
+    id: `bunker-${Date.now()}`,
+    bays,
+    credits: BUNKER_STARTING_CREDITS,
+    name,
+  };
+}
+
+export function canAddToBay(bay: BunkerBay, vehicleType: VehicleType, count: number): boolean {
+  if (bay.content === null) {
+    return count <= BAY_CAPACITY[vehicleType];
+  }
+
+  // Bay already has content
+  if (bay.content.type !== vehicleType) {
+    return false;
+  }
+
+  // Check if adding would exceed capacity
+  const totalCount = bay.content.ids.length + count;
+  return totalCount <= BAY_CAPACITY[vehicleType];
+}
+
+export function getBayUsagePercent(bay: BunkerBay): number {
+  if (bay.content === null) {
+    return 0;
+  }
+
+  const capacity = BAY_CAPACITY[bay.content.type];
+  const used = bay.content.ids.length;
+  return (used / capacity) * 100;
 }
