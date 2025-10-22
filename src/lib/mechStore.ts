@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { Mech, FrameType, BASE_MECH_COST, BASE_MECH_STATS } from "./game-data";
+import { Mech, BASE_MECH_COST, BASE_MECH_STATS } from "./game-data";
 
 interface MechStoreState {
   mechs: Mech[];

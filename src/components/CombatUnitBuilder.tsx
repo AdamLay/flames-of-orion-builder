@@ -4,41 +4,12 @@ import React from "react";
 import { Mech, calculateMechCost, formatCredits } from "@/lib/game-data";
 import { useMechStore } from "@/lib/mechStore";
 import { MechBuilder } from "./MechBuilder";
+import ImportExportControl from "./ImportExportControl";
 
 export function CombatUnitBuilder() {
-  const { mechs, addMech, updateMech, removeMech, setMechs } = useMechStore();
+  const { mechs, addMech, updateMech, removeMech } = useMechStore();
 
   const totalCredits = mechs.reduce((sum: number, mech: Mech) => sum + calculateMechCost(mech), 0);
-
-  const exportToJson = () => {
-    const dataStr = JSON.stringify(mechs, null, 2);
-    const dataBlob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "combat-unit.json";
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const importFromJson = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const imported = JSON.parse(e.target?.result as string);
-        if (Array.isArray(imported)) {
-          setMechs(imported);
-        }
-      } catch (error) {
-        alert("Error importing file. Please check the file format.");
-        console.error(error);
-      }
-    };
-    reader.readAsText(file);
-  };
 
   return (
     <div className="min-h-screen">
@@ -58,28 +29,10 @@ export function CombatUnitBuilder() {
               <button onClick={addMech} className="btn btn-success">
                 + Add Mech
               </button>
-              {/* <button onClick={exportToJson} disabled={mechs.length === 0} className="btn btn-info">
-                Export
-              </button>
-              <label className="btn btn-info">
-                Import
-                <input type="file" accept=".json" onChange={importFromJson} className="hidden" />
-              </label> */}
+              {/* <ImportExportControl /> */}
             </div>
           </div>
         </div>
-
-        {/* Info Box */}
-        {/* <div className="card-1 mb-4">
-          <div className="text-primary font-bold mb-2">Quick Guide</div>
-          <ul className="text-gray-300 text-sm space-y-1">
-            <li>• Each Mech costs $50,000 base</li>
-            <li>• All Mechs start with 4 Platform slots (max 8 with upgrades)</li>
-            <li>• Upgrades, Ranged Weapons, and Melee Weapons each use platform slots</li>
-            <li>• Some upgrades are stackable (can be equipped multiple times)</li>
-            <li>• Use the dropdowns to add equipment to each mech</li>
-          </ul>
-        </div> */}
 
         {/* Mechs List */}
         {mechs.length === 0 ? (

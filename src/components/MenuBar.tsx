@@ -14,7 +14,7 @@ export default function MenuBar({}: MenuBarProps) {
     <Tabs defaultValue={path} className="flex-1 flex flex-col" onValueChange={(x) => router.push(x)}>
       <TabsList className="grid grid-cols-2 md:grid-cols-4 py-4">
         <TabsTrigger value="/rules">Rules</TabsTrigger>
-        <TabsTrigger value="/builder">Combat Unit</TabsTrigger>
+        <TabsTrigger value="/bunker">Bunker</TabsTrigger>
       </TabsList>
     </Tabs>
   );
