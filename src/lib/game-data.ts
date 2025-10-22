@@ -556,19 +556,19 @@ export function calculateUsedPlatforms(mech: Mech): number {
   // Count upgrades (excluding Extra Platforms which don't use slots)
   mech.upgrades.forEach((upgradeId) => {
     const upgrade = getUpgradeById(upgradeId);
-    if (upgrade) used += upgrade.platformSlots || 1;
+    if (upgrade) used += upgrade.platformSlots ?? 1;
   });
 
   // Count ranged weapons
   mech.rangedWeapons.forEach((weaponId) => {
     const weapon = getRangedWeaponById(weaponId);
-    if (weapon) used += weapon.platformSlots || 1;
+    if (weapon) used += weapon.platformSlots ?? 1;
   });
 
   // Count melee weapons
   mech.meleeWeapons.forEach((weaponId) => {
     const weapon = getMeleeWeaponById(weaponId);
-    if (weapon) used += weapon.platformSlots || 1;
+    if (weapon) used += weapon.platformSlots ?? 1;
   });
 
   return used;

@@ -10,7 +10,7 @@ import {
   calculateMechCost,
 } from "@/lib/game-data";
 import { useBunkerStore } from "@/lib/bunkerStore";
-import { MechBuilder } from "./MechBuilder";
+import { MechBuilder } from "./builder/MechBuilder";
 
 interface BayItem {
   type: VehicleType;
@@ -91,7 +91,7 @@ export function BunkerManager() {
           </div>
           <div className="bg-base-200 p-2 rounded">
             <div className="text-primary font-bold text-sm">AVAILABLE CREDITS</div>
-            <div className="text-title text-2xl font-bold text-success">
+            <div className="text-title text-2xl font-bold text-accent">
               {formatCredits(getAvailableCredits())}
             </div>
           </div>

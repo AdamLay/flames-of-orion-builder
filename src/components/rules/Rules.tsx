@@ -1,7 +1,5 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MessageCircleWarning, TriangleAlert } from "lucide-react";
 import { RulesSection } from "./RulesSection";
-import Keyword from "./ui/keyword";
+import Keyword from "../ui/keyword";
 
 export default function Rules() {
   return (
