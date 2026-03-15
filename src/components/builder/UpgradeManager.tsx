@@ -61,7 +61,7 @@ export function UpgradeManager({
 
             <div className="overflow-y-auto max-h-[85vh] p-4">
               <h2 className="text-xl font-bold text-primary mb-2">SELECT UPGRADE</h2>
-              <div className="max-h-[75vh] overflow-y-auto">
+              <div className="max-h-[75dvh] overflow-y-auto">
                 {orderBy(UPGRADES, "cost").map((upgrade) => (
                   <button
                     key={upgrade.id}

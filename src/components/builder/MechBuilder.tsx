@@ -122,12 +122,12 @@ export function MechBuilder({ mech, mechIndex, onUpdate, onRemove }: MechBuilder
 
   return (
     <div className="card-1 space-y-4">
-      <div className="flex items-center gap-4 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         <input
           type="text"
           value={mech.callSign}
           onChange={(e) => updateCallSign(e.target.value)}
-          className="input input-lg w-full"
+          className="input input-lg w-full col-span-2"
           placeholder="Enter mech call sign..."
         />
         <select
@@ -141,10 +141,12 @@ export function MechBuilder({ mech, mechIndex, onUpdate, onRemove }: MechBuilder
             </option>
           ))}
         </select>
-        <div className="text-2xl font-bold">{formatCredits(totalCost)}</div>
-        <button onClick={onRemove} className="btn btn-error btn-sm btn-square btn-soft">
-          <Trash2 className="size-4" />
-        </button>
+        <div className="flex justify-between items-center">
+          <div className="text-2xl font-bold">{formatCredits(totalCost)}</div>
+          <button onClick={onRemove} className="btn btn-error btn-sm btn-square btn-soft">
+            <Trash2 className="size-4" />
+          </button>
+        </div>
       </div>
 
       <StatsDisplay stats={stats} usedPlatforms={usedPlatforms} totalPlatforms={totalPlatforms} />
