@@ -11,18 +11,20 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       { title: "TanStack Start Starter" },
-      {name: "description", content: "Flames of Orion - Mech Combat Unit Builder and Rules Reference."}
+      {
+        name: "description",
+        content: "Flames of Orion - Mech Combat Unit Builder and Rules Reference.",
+      },
     ],
     links: [
       {
-        rel: 'stylesheet',
+        rel: "stylesheet",
         href: appCss,
       },
     ],
   }),
   component: RootLayout,
-})
-
+});
 
 function RootLayout() {
   return (
@@ -32,8 +34,9 @@ function RootLayout() {
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Wallpoet&display=swap"
-          rel="stylesheet"></link>
-          <HeadContent />
+          rel="stylesheet"
+        ></link>
+        <HeadContent />
       </head>
       <body className="antialiased">
         <MenuBar />

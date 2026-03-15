@@ -82,6 +82,7 @@ export interface Bunker {
   bays: BunkerBay[];
   credits: number;
   name: string;
+  modifiedAt: string;
 }
 
 // Base Mech Stats
@@ -300,7 +301,8 @@ export const UPGRADES: Upgrade[] = [
     id: "counter-missiles",
     name: "Counter Missiles",
     cost: 10000,
-    description: "When hit with a ranged critical hit, negate all extra damage from the critical hit.",
+    description:
+      "When hit with a ranged critical hit, negate all extra damage from the critical hit.",
     platformSlots: 1,
   },
   {
@@ -344,7 +346,8 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     name: "Heavy Weapon",
     cost: 25000,
     damage: "4",
-    special: "Equipped model may only move at half speed if it fires this weapon this turn. Takes up 2 PFs.",
+    special:
+      "Equipped model may only move at half speed if it fires this weapon this turn. Takes up 2 PFs.",
     platformSlots: 2,
   },
   {
@@ -407,7 +410,8 @@ export const MELEE_WEAPONS: MeleeWeapon[] = [
     cost: 15000,
     damage: "2",
     range: '3"',
-    special: 'This weapon has an Engagement range of 3" and may treat enemies as if they are within 1".',
+    special:
+      'This weapon has an Engagement range of 3" and may treat enemies as if they are within 1".',
     platformSlots: 1,
   },
   {
@@ -424,7 +428,8 @@ export const MELEE_WEAPONS: MeleeWeapon[] = [
     name: "Power Weapon",
     cost: 15000,
     damage: "2 (AP)",
-    special: "On an attack roll of 1, the power core burns out, losing AP for the rest of the match.",
+    special:
+      "On an attack roll of 1, the power core burns out, losing AP for the rest of the match.",
     platformSlots: 1,
   },
   {
@@ -640,6 +645,7 @@ export function createEmptyBunker(name: string = "My Bunker"): Bunker {
     bays,
     credits: BUNKER_STARTING_CREDITS,
     name,
+    modifiedAt: new Date().toISOString(),
   };
 }
 

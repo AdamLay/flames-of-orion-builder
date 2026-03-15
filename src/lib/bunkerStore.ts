@@ -1,10 +1,13 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
-import { Bunker, Mech, createEmptyBunker, BASE_MECH_COST, BASE_MECH_STATS } from "./game-data";
-
-interface BunkerStoreState {
+import { subscribeWithSelector } from "zustand/middleware";
+import { BASE_MECH_COST, BASE_MECH_STATS, Bunker, Mech, createEmptyBunker } from "./game-data";
+import { saveToLocalStorage } from "./utils";
+export type BunkerStoreState = {
   bunker: Bunker;
   mechs: Mech[]; // All mechs owned by the player
+};
+
+type BunkerStoreActions = {
   initializeBunker: () => void;
 
   // Mech management
@@ -20,11 +23,23 @@ interface BunkerStoreState {
   // Credit management
   updateBunkerCredits: (amount: number) => void;
   setBunker: (bunker: Bunker) => void;
-}
+  loadState: (state: BunkerStoreState) => void;
+};
+type BunkerStore = BunkerStoreState & BunkerStoreActions;
 
-export const useBunkerStore = create<BunkerStoreState>()(
-  persist(
-    (set, get) => ({
+export const useBunkerStore = create<BunkerStore>()(
+  subscribeWithSelector((set, get) => {
+    const withUpdateModified = (state: Partial<BunkerStore>): Partial<BunkerStore> => {
+      return {
+        ...state,
+        bunker: {
+          ...state.bunker,
+          modifiedAt: new Date().toISOString(),
+        } as Bunker,
+      };
+    };
+
+    return {
       bunker: createEmptyBunker(),
       mechs: [],
 
@@ -49,7 +64,7 @@ export const useBunkerStore = create<BunkerStoreState>()(
             meleeWeapons: [],
             weaponAmmo: {},
           };
-          return { mechs: [...state.mechs, newMech] };
+          return withUpdateModified({ mechs: [...state.mechs, newMech] });
         });
       },
 
@@ -66,7 +81,7 @@ export const useBunkerStore = create<BunkerStoreState>()(
             return bay;
           });
 
-          return { mechs: newMechs, bunker: newBunker };
+          return withUpdateModified({ mechs: newMechs, bunker: newBunker });
         });
       },
 
@@ -90,11 +105,11 @@ export const useBunkerStore = create<BunkerStoreState>()(
             return bay;
           });
 
-          return { mechs: newMechs, bunker: newBunker };
+          return withUpdateModified({ mechs: newMechs, bunker: newBunker });
         });
       },
 
-      setMechs: (mechs: Mech[]) => set({ mechs }),
+      setMechs: (mechs: Mech[]) => set(withUpdateModified({ mechs })),
 
       // Bay management methods
       addMechToBunker: (mech: Mech, bayId: string) => {
@@ -125,7 +140,7 @@ export const useBunkerStore = create<BunkerStoreState>()(
           const mechExists = state.mechs.some((m) => m.id === mech.id);
           const newMechs = mechExists ? state.mechs : [...state.mechs, mech];
 
-          return { bunker: newBunker, mechs: newMechs };
+          return withUpdateModified({ bunker: newBunker, mechs: newMechs });
         });
 
         return true;
@@ -143,25 +158,32 @@ export const useBunkerStore = create<BunkerStoreState>()(
             }
           }
 
-          return { bunker: newBunker };
+          return withUpdateModified({ bunker: newBunker });
         });
       },
 
       // Credit management methods
       updateBunkerCredits: (amount: number) => {
-        set((state) => ({
-          bunker: {
-            ...state.bunker,
-            credits: Math.max(0, state.bunker.credits + amount),
-          },
-        }));
+        set((state) =>
+          withUpdateModified({
+            bunker: {
+              ...state.bunker,
+              credits: Math.max(0, state.bunker.credits + amount),
+            },
+          }),
+        );
       },
 
       setBunker: (bunker: Bunker) => set({ bunker }),
-    }),
-    {
-      name: "bunker-store",
-      storage: createJSONStorage(() => localStorage),
-    }
-  )
+      loadState: (state: BunkerStoreState) => set(state),
+    };
+  }),
+);
+
+useBunkerStore.subscribe(
+  (state) => state,
+  (slice: BunkerStoreState) => {
+    console.log("Bunker store updated:", slice);
+    saveToLocalStorage(slice);
+  },
 );

@@ -1,8 +1,6 @@
 import { useRouterState } from "@tanstack/react-router";
 
-interface MenuBarProps {}
-
-export default function MenuBar({}: MenuBarProps) {
+export default function MenuBar() {
   const path = useRouterState({
     select: (state) => state.location.pathname,
   });

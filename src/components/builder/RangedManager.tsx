@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { RANGED_WEAPONS, AMMO, getRangedWeaponById, getAmmoById } from "@/lib/game-data";
+import { AMMO, getAmmoById, getRangedWeaponById, RANGED_WEAPONS } from "@/lib/game-data";
+import { useState } from "react";
 import { WeaponListItem } from "./WeaponListItem";
 
 interface Props {
@@ -49,7 +49,8 @@ export function RangedManager({
       <button
         onClick={() => setIsDialogOpen(true)}
         disabled={!canAddWeapons}
-        className="btn btn-accent btn-sm w-full mb-2 disabled:btn-disabled">
+        className="btn btn-accent btn-sm w-full mb-2 disabled:btn-disabled"
+      >
         + Add Ranged Weapon
       </button>
 
@@ -64,12 +65,16 @@ export function RangedManager({
                   key={weapon.id}
                   onClick={() => handleSelectWeapon(weapon.id)}
                   disabled={!canAddWeapon(weapon.id)}
-                  className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent">
+                  className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                >
                   <WeaponListItem key={weapon.id} weapon={weapon} weaponType="ranged" />
                 </button>
               ))}
             </div>
-            <button onClick={() => setIsDialogOpen(false)} className="btn btn-ghost btn-sm mt-4 w-full">
+            <button
+              onClick={() => setIsDialogOpen(false)}
+              className="btn btn-ghost btn-sm mt-4 w-full"
+            >
               Close
             </button>
           </div>

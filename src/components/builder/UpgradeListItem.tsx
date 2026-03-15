@@ -1,4 +1,3 @@
-import React from "react";
 import { Upgrade, formatCredits } from "@/lib/game-data";
 import { Trash2 } from "lucide-react";
 
