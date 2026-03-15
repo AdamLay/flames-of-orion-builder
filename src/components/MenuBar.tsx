@@ -1,5 +1,3 @@
-
-
 import { useRouterState } from "@tanstack/react-router";
 
 interface MenuBarProps {}

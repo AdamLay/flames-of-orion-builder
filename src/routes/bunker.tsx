@@ -1,5 +1,9 @@
 import { BunkerManager } from "@/components/BunkerManager";
+import { createFileRoute } from "@tanstack/react-router";
 
-export default function BunkerPage() {
+export const Route = createFileRoute('/bunker')({
+   component: BunkerPage,
+}) 
+ function BunkerPage() {
   return <BunkerManager />;
 }
