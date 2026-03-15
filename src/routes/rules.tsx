@@ -8,7 +8,7 @@ export const Route = createFileRoute("/rules")({
 
 export default function RulesPage() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="max-w-4xl mx-auto flex flex-col gap-2">
       <RulesSection title="INTRO BRIEFING / TOOLS">
         <h3 className="text-xl pt-4">MODELS</h3>
         <p>

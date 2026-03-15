@@ -1,20 +1,15 @@
-import BunkerName from "@/components/builder/BunkerName";
+import BunkerOverview from "@/components/builder/BunkerOverview";
 import CreateNewButton from "@/components/builder/CreateNewButton";
+import EmptyBunker from "@/components/builder/EmptyBunker";
 import LoadButton from "@/components/builder/LoadButton";
 import { MechBuilder } from "@/components/builder/MechBuilder";
 import ShareButton from "@/components/builder/ShareButton";
-import useLoadLastBunker from "@/hooks/useLoadLastBunker";
+import StorageBays from "@/components/builder/StorageBays";
+import { useLoadFromUrl, useLoadLastBunker, useMediaQuery } from "@/hooks";
 import { useBunkerStore } from "@/lib/bunkerStore";
-import {
-  BAY_CAPACITY,
-  BUNKER_STARTING_CREDITS,
-  Mech,
-  calculateMechCost,
-  formatCredits,
-} from "@/lib/game-data";
-import { decodeState } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Drawer } from "vaul";
 import z from "zod";
 
 const bunkerSearchSchema = z.object({
@@ -28,228 +23,84 @@ export const Route = createFileRoute("/bunker")({
 
 function BunkerPage() {
   const search = Route.useSearch();
-  const { bunker, mechs, addMechToBunker, updateMech, removeMech, loadState } = useBunkerStore();
-  const [selectedBay, setSelectedBay] = useState<string | null>(null);
+  const { bunker, mechs, updateMech, removeMech } = useBunkerStore();
+  const [selectedBayId, setSelectedBayId] = useState<string | null>(null);
 
+  const isSmallScreen = useMediaQuery("(max-width: 767px)");
   useLoadLastBunker();
+  useLoadFromUrl(search.share || "");
 
-  useEffect(() => {
-    console.log(search);
-    if (search.share) {
-      const state = decodeState(search.share);
-      console.log("Loaded state from URL:", state);
-      loadState(state);
-    }
-  }, [search.share]);
+  const selectedBay = bunker.bays.find((bay) => bay.id === selectedBayId) || null;
+  const selectedMech = mechs.find((m) => m.id === selectedBay?.content?.ids[0]) || null;
 
-  const handleCreateStartingMechs = () => {
-    // Create 4 starting mechs
-    const newMech: Mech = {
-      id: `mech-${Date.now()}-1`,
-      callSign: `Mech 1`,
-      baseCost: 0,
-      frameType: "medium" as const,
-      stats: {
-        speed: 6,
-        combatSkill: "4+",
-        armor: "6+",
-        hullPoints: 6,
-        heatLimit: 10,
-        platforms: 4,
-      },
-      upgrades: [],
-      rangedWeapons: [],
-      meleeWeapons: [],
-      weaponAmmo: {},
-    };
-
-    addMechToBunker(newMech, bunker.bays[0]?.id);
-  };
-
-  const getTotalMechs = () => {
-    return bunker.bays.reduce((sum, bay) => {
-      if (bay.content?.type === "mech") {
-        return sum + bay.content.ids.length;
-      }
-      return sum;
-    }, 0);
-  };
-
-  const getUsedBayCount = () => {
-    return bunker.bays.filter((bay) => bay.content !== null).length;
-  };
-
-  const getBayCapacityDisplay = (bayIndex: number): string => {
-    const bay = bunker.bays[bayIndex];
-    if (bay.content === null) {
-      return "Empty";
-    }
-    const capacity = BAY_CAPACITY[bay.content.type];
-    const used = bay.content.ids.length;
-    return `${used}/${capacity}`;
-  };
-
-  const getSpentCredits = (): number => {
-    return mechs.reduce((sum, mech, index) => sum + calculateMechCost(mech, index), 0);
-  };
-
-  const getAvailableCredits = (): number => {
-    return BUNKER_STARTING_CREDITS - getSpentCredits();
-  };
+  const selectedMechBuilder = selectedMech && (
+    <MechBuilder
+      key={selectedMech.id}
+      mech={selectedMech}
+      mechIndex={0}
+      onUpdate={(updatedMech) => updateMech(selectedMech.id, updatedMech)}
+      onRemove={() => removeMech(selectedMech.id)}
+    />
+  );
 
   return (
-    <div className="min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-end gap-4 mb-4">
-          <CreateNewButton />
-          <LoadButton />
-          <ShareButton />
-        </div>
-        {/* Bunker Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4 text-center">
-          <div className="bg-base-200 p-2 rounded col-span-2">
-            <div className="text-primary font-bold text-sm">BUNKER NAME</div>
-            <BunkerName />
-            {/* <div className="text-title text-xl font-bold">{bunker.name}</div> */}
-          </div>
-          <div className="bg-base-200 p-2 rounded">
-            <div className="text-primary font-bold text-sm">CREDITS</div>
-            <div className="text-title text-2xl font-bold text-accent">
-              {formatCredits(getAvailableCredits())}
-            </div>
-          </div>
-          <div className="bg-base-200 p-2 rounded">
-            <div className="text-primary font-bold text-sm">MECHS</div>
-            <div className="text-title text-3xl font-bold">{getTotalMechs()}</div>
-          </div>
+    <div className="max-w-7xl mx-auto px-2">
+      <div className="flex justify-end gap-4 mb-4">
+        <CreateNewButton />
+        <LoadButton />
+        <ShareButton />
+      </div>
+      <BunkerOverview />
 
-          <div className="bg-base-200 p-2 rounded">
-            <div className="text-primary font-bold text-sm">USED BAYS</div>
-            <div className="text-title text-2xl font-bold">
-              {getUsedBayCount()}/{bunker.bays.length}
-            </div>
-          </div>
-        </div>
-
-        {/* Storage Bays */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-2 text-primary">STORAGE BAYS</h2>
-
-          <div className="card-1 mb-4 bg-opacity-50 border-l-4 border-primary">
-            <p className="text-xs text-gray-400">
-              Bay Capacity: You may store 1 Mech, or 2 ground vehicles, 2 aircraft, or 3 infantry in
-              each bay
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {bunker.bays.map((bay, index) => (
-              <div
-                key={bay.id}
-                onClick={() => setSelectedBay(selectedBay === bay.id ? null : bay.id)}
-                className={`card-1 p-4 cursor-pointer transition-all ${
-                  selectedBay === bay.id ? "ring-2 ring-primary" : ""
-                } ${bay.content ? "bg-opacity-60" : "bg-opacity-30"}`}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <div className="font-bold text-primary">BAY {index + 1}</div>
-                  <div className="text-sm font-mono text-gray-400">
-                    {getBayCapacityDisplay(index)}
-                  </div>
-                </div>
-
-                {bay.content ? (
-                  (() => {
-                    const content = mechs.find((x) => x.id === bay.content?.ids[0]);
-                    return (
-                      <div className="space-y-2">
-                        <div className="text-sm font-bold capitalize">
-                          {bay.content.type.replace("-", " ")}:{" "}
-                          {content ? content.callSign : "Multiple Units"}
-                        </div>
-                        <div className="text-xs text-gray-400">
-                          {bay.content.ids.length} unit{bay.content.ids.length !== 1 ? "s" : ""}{" "}
-                          stored
-                        </div>
-                      </div>
-                    );
-                  })()
-                ) : (
-                  <div className="space-y-2 flex flex-col items-center">
-                    <div className="text-xs text-gray-500 italic">Bay is empty</div>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const newMech: Mech = {
-                          id: `mech-${Date.now()}`,
-                          callSign: `Mech ${getTotalMechs() + 1}`,
-                          baseCost: 0,
-                          frameType: "medium" as const,
-                          stats: {
-                            speed: 6,
-                            combatSkill: "4+",
-                            armor: "6+",
-                            hullPoints: 6,
-                            heatLimit: 10,
-                            platforms: 4,
-                          },
-                          upgrades: [],
-                          rangedWeapons: [],
-                          meleeWeapons: [],
-                          weaponAmmo: {},
-                        };
-                        addMechToBunker(newMech, bay.id);
-                      }}
-                      className="btn btn-sm btn-success self-center"
-                    >
-                      + Add Mech
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mechs Management */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-4 text-primary">MECH CUSTOMIZATION</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4">
+        <StorageBays selectedBayId={selectedBayId} setSelectedBayId={setSelectedBayId} />
+        <div className="hidden md:block mb-6 col-span-2">
+          <h2 className="text-2xl font-bold mb-2 text-primary">MECH CUSTOMIZATION</h2>
           {mechs.length === 0 ? (
-            <div className="card-1 p-12 text-center">
-              <div className="text-gray-400 text-lg mb-4">
-                Start with 4 free Mechs. Customize them with your{" "}
-                {formatCredits(BUNKER_STARTING_CREDITS)}!
-              </div>
-              <button onClick={handleCreateStartingMechs} className="btn btn-success self-center">
-                + Add Starting Mech
-              </button>
-            </div>
+            <EmptyBunker />
           ) : (
-            <div className="space-y-6">
-              {mechs.map((mech, index) => (
-                <MechBuilder
-                  key={mech.id}
-                  mech={mech}
-                  mechIndex={index}
-                  onUpdate={(updatedMech) => updateMech(mech.id, updatedMech)}
-                  onRemove={() => removeMech(mech.id)}
-                />
-              ))}
-            </div>
+            <div className="space-y-6">{selectedMechBuilder}</div>
           )}
         </div>
+      </div>
 
-        {/* Bunker Info */}
-        <div className="card-1 mb-6 border-l-4 border-info">
-          <p className="text-sm text-gray-300">
-            <span className="font-bold text-info">Bunker Purpose:</span> After each battle, your
-            Combat Unit returns here. Store additional Mechs, spare Upgrades, Credits, and loot
-            between battles. Keep track of all platforms, credits, and extra models in your bunker.
-          </p>
-        </div>
-        <p className="text-sm opacity-85">
-          Bunker saved at: {new Date(bunker.modifiedAt).toLocaleString()}
+      {isSmallScreen && (
+        <Drawer.Root open={!!selectedMech} onClose={() => setSelectedBayId(null)}>
+          <Drawer.Portal>
+            <Drawer.Overlay
+              style={{ position: "fixed", bottom: 0, left: 0, right: 0, top: 0 }}
+              className="fixed inset-0 bg-black/40"
+            />
+            <Drawer.Content
+              style={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                maxHeight: "fit-content",
+                zIndex: 999,
+              }}
+              className="bg-base-200"
+            >
+              <div className="p-2"></div>
+              <Drawer.Handle />
+              {selectedMechBuilder}
+            </Drawer.Content>
+          </Drawer.Portal>
+        </Drawer.Root>
+      )}
+
+      {/* Bunker Info */}
+      <div className="card-1 mb-6 border-l-4 border-info">
+        <p className="text-sm text-gray-300">
+          <span className="font-bold text-info">Bunker Purpose:</span> After each battle, your
+          Combat Unit returns here. Store additional Mechs, spare Upgrades, Credits, and loot
+          between battles. Keep track of all platforms, credits, and extra models in your bunker.
         </p>
       </div>
+      <p className="text-sm opacity-85">
+        Bunker saved at: {new Date(bunker.modifiedAt).toLocaleString()}
+      </p>
     </div>
   );
 }

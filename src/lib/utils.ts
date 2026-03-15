@@ -3,6 +3,7 @@ import orderBy from "lodash-es/orderBy";
 import pako from "pako";
 import { twMerge } from "tailwind-merge";
 import { BunkerStoreState } from "./bunkerStore";
+import { Bunker } from "./game-data";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -34,4 +35,13 @@ export function getLocalSaves(): BunkerStoreState[] {
     (key) => JSON.parse(localStorage.getItem(key) || "") as BunkerStoreState,
   );
   return orderBy(saves, (x: BunkerStoreState) => x.bunker.modifiedAt, "desc");
+}
+
+export function getTotalMechs(bunker: Bunker) {
+  return bunker.bays.reduce((sum, bay) => {
+    if (bay.content?.type === "mech") {
+      return sum + bay.content.ids.length;
+    }
+    return sum;
+  }, 0);
 }

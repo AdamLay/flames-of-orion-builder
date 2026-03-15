@@ -12,7 +12,7 @@ export function UpgradeListItem({ upgrade, onRemove }: UpgradeListItemProps) {
       <div className="flex justify-between items-start">
         <div className="flex-1">
           <div className="text-primary font-bold">{upgrade.name}</div>
-          <div className="text-xs">
+          <div className="">
             {formatCredits(upgrade.cost)}
             {upgrade.platformSlots === 0 && " (No PF)"}
             {upgrade.platformSlots && upgrade.platformSlots > 1 && ` (${upgrade.platformSlots} PF)`}
@@ -24,7 +24,7 @@ export function UpgradeListItem({ upgrade, onRemove }: UpgradeListItemProps) {
           </button>
         )}
       </div>
-      <div className="opacity-80 text-xs mt-1">{upgrade.description}</div>
+      <div className="opacity-80 text-sm mt-1">{upgrade.description}</div>
     </div>
   );
 }

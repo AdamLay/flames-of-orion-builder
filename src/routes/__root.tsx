@@ -40,7 +40,7 @@ function RootLayout() {
       </head>
       <body className="antialiased">
         <MenuBar />
-        <main className="min-h-screen max-w-4xl mx-auto flex flex-col pt-4">
+        <main className="min-h-screen flex flex-col pt-4">
           <Outlet />
         </main>
         <Scripts />

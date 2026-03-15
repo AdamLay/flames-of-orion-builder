@@ -2,7 +2,7 @@ import { useBunkerStore } from "@/lib/bunkerStore";
 import { getLocalSaves } from "@/lib/utils";
 import { useEffect } from "react";
 
-export default function useLoadLastBunker() {
+export function useLoadLastBunker() {
   const { loadState } = useBunkerStore();
   useEffect(() => {
     const localSaves = getLocalSaves();

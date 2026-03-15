@@ -1,5 +1,6 @@
 import { UPGRADES, getUpgradeById } from "@/lib/game-data";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { UpgradeListItem } from "./UpgradeListItem";
 
 interface Props {
@@ -49,31 +50,33 @@ export function UpgradeManager({
       </button>
 
       {/* Available Upgrades Dialog */}
-      {isDialogOpen && (
-        <dialog open className="modal">
-          <div className="modal-box bg-base-200 max-h-[80vh] overflow-y-auto">
-            <h2 className="text-xl font-bold text-primary mb-4">Select Upgrade</h2>
-            <div>
-              {UPGRADES.map((upgrade) => (
-                <button
-                  key={upgrade.id}
-                  onClick={() => handleSelectUpgrade(upgrade.id)}
-                  disabled={!canAddUpgrade(upgrade.id)}
-                  className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-                >
-                  <UpgradeListItem upgrade={upgrade} />
-                </button>
-              ))}
+      {isDialogOpen &&
+        createPortal(
+          <dialog open className="modal">
+            <div className="modal-box bg-base-200 max-h-[80vh] overflow-y-auto">
+              <h2 className="text-xl font-bold text-primary mb-4">SELECT UPGRADE</h2>
+              <div>
+                {UPGRADES.map((upgrade) => (
+                  <button
+                    key={upgrade.id}
+                    onClick={() => handleSelectUpgrade(upgrade.id)}
+                    disabled={!canAddUpgrade(upgrade.id)}
+                    className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                  >
+                    <UpgradeListItem upgrade={upgrade} />
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() => setIsDialogOpen(false)}
+                className="btn btn-ghost btn-sm mt-4 w-full"
+              >
+                Close
+              </button>
             </div>
-            <button
-              onClick={() => setIsDialogOpen(false)}
-              className="btn btn-ghost btn-sm mt-4 w-full"
-            >
-              Close
-            </button>
-          </div>
-        </dialog>
-      )}
+          </dialog>,
+          window.document.body,
+        )}
 
       {/* Equipped Upgrades */}
       <div className="mb-4 space-y-2">
