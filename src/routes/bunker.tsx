@@ -84,7 +84,7 @@ function BunkerPage() {
             >
               <div className="p-2"></div>
               <Drawer.Handle />
-              {selectedMechBuilder}
+              <div className="overflow-y-auto max-h-[85vh]">{selectedMechBuilder}</div>
             </Drawer.Content>
           </Drawer.Portal>
         </Drawer.Root>
