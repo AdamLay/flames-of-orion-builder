@@ -1,97 +1,27 @@
-import { UPGRADES, getUpgradeById } from "@/lib/game-data";
+import { UPGRADES } from "@/lib/game-data";
 import orderBy from "lodash-es/orderBy";
-import { useState } from "react";
-import { Drawer } from "vaul";
+import { ItemListManager } from "./ItemListManager";
 import { UpgradeListItem } from "./UpgradeListItem";
 
 interface Props {
   upgrades: string[];
   onAddUpgrade: (upgradeId: string) => void;
   onRemoveUpgrade: (index: number) => void;
-  usedPlatforms: number;
-  totalPlatforms: number;
+  sparePlatforms: number;
 }
 
-export function UpgradeManager({
-  upgrades,
-  onAddUpgrade,
-  onRemoveUpgrade,
-  usedPlatforms,
-  totalPlatforms,
-}: Props) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const sparePlatforms = totalPlatforms - usedPlatforms;
-
-  const canAddUpgrade = (upgradeId: string): boolean => {
-    const upgrade = getUpgradeById(upgradeId);
-    if (!upgrade) return false;
-
-    // Check if upgrade can fit in spare platforms
-    const platformsNeeded = upgrade.platformSlots ?? 1;
-    return platformsNeeded <= sparePlatforms;
-  };
-
-  const canAddUpgrades = UPGRADES.some((upgrade) => canAddUpgrade(upgrade.id));
-
-  const handleSelectUpgrade = (upgradeId: string) => {
-    onAddUpgrade(upgradeId);
-    setIsDialogOpen(false);
-  };
-
+export function UpgradeManager({ upgrades, onAddUpgrade, onRemoveUpgrade, sparePlatforms }: Props) {
   return (
-    <div>
-      <h3 className="text-primary font-bold text-lg mb-2">UPGRADES</h3>
-      <button
-        onClick={() => setIsDialogOpen(true)}
-        disabled={!canAddUpgrades}
-        className="btn btn-accent btn-sm w-full mb-2 disabled:btn-disabled"
-      >
-        + Add Upgrade
-      </button>
-
-      {/* Available Upgrades Dialog */}
-      <Drawer.Root open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-        <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className="bg-base-200 h-fit fixed bottom-0 left-0 right-0 max-w-2xl mx-auto outline-none">
-            <div className="p-3">
-              <Drawer.Handle />
-            </div>
-
-            <div className="overflow-y-auto max-h-[85vh] p-4">
-              <h2 className="text-xl font-bold text-primary mb-2">SELECT UPGRADE</h2>
-              <div className="max-h-[75dvh] overflow-y-auto">
-                {orderBy(UPGRADES, "cost").map((upgrade) => (
-                  <button
-                    key={upgrade.id}
-                    onClick={() => handleSelectUpgrade(upgrade.id)}
-                    disabled={!canAddUpgrade(upgrade.id)}
-                    className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-                  >
-                    <UpgradeListItem upgrade={upgrade} />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </Drawer.Content>
-        </Drawer.Portal>
-      </Drawer.Root>
-
-      {/* Equipped Upgrades */}
-      <div className="mb-4 space-y-2">
-        {upgrades.map((upgradeId, index) => {
-          const upgrade = getUpgradeById(upgradeId);
-          if (!upgrade) return null;
-          return (
-            <UpgradeListItem
-              key={`${upgradeId}-${index}`}
-              upgrade={upgrade}
-              onRemove={() => onRemoveUpgrade(index)}
-            />
-          );
-        })}
-      </div>
-    </div>
+    <ItemListManager
+      title="UPGRADES"
+      buttonLabel="Add Upgrade"
+      selectDialogTitle="SELECT UPGRADE"
+      items={orderBy(UPGRADES, "cost")}
+      equippedIds={upgrades}
+      onAdd={onAddUpgrade}
+      onRemove={onRemoveUpgrade}
+      ItemRenderer={(props) => <UpgradeListItem upgrade={props.item} onRemove={props.onRemove} />}
+      sparePlatforms={sparePlatforms}
+    />
   );
 }

@@ -29,6 +29,7 @@ export function MechBuilder({ mech, mechIndex, onUpdate, onRemove }: MechBuilder
   const totalCost = calculateMechCost(mech, mechIndex);
   const usedPlatforms = calculateUsedPlatforms(mech);
   const totalPlatforms = calculateTotalPlatforms(mech);
+  const sparePlatforms = totalPlatforms - usedPlatforms;
   console.log("mech", mech);
   const updateCallSign = (callSign: string) => {
     onUpdate({ ...mech, callSign });
@@ -156,8 +157,7 @@ export function MechBuilder({ mech, mechIndex, onUpdate, onRemove }: MechBuilder
           upgrades={mech.upgrades}
           onAddUpgrade={addUpgrade}
           onRemoveUpgrade={removeUpgrade}
-          usedPlatforms={usedPlatforms}
-          totalPlatforms={totalPlatforms}
+          sparePlatforms={sparePlatforms}
         />
 
         <RangedManager
@@ -167,16 +167,14 @@ export function MechBuilder({ mech, mechIndex, onUpdate, onRemove }: MechBuilder
           onRemoveRangedWeapon={removeRangedWeapon}
           onAddWeaponAmmo={addWeaponAmmo}
           onRemoveWeaponAmmo={removeWeaponAmmo}
-          usedPlatforms={usedPlatforms}
-          totalPlatforms={totalPlatforms}
+          sparePlatforms={sparePlatforms}
         />
 
         <MeleeManager
           meleeWeapons={mech.meleeWeapons}
           onAddMeleeWeapon={addMeleeWeapon}
           onRemoveMeleeWeapon={removeMeleeWeapon}
-          usedPlatforms={usedPlatforms}
-          totalPlatforms={totalPlatforms}
+          sparePlatforms={sparePlatforms}
         />
       </div>
     </div>
