@@ -1,32 +1,21 @@
-"use client";
-
-import React from "react";
 import {
-  Mech,
-  FrameType,
-  FRAME_PROFILES,
-  UPGRADES,
-  RANGED_WEAPONS,
-  MELEE_WEAPONS,
-  AMMO,
-  getFrameProfileById,
-  getUpgradeById,
-  getRangedWeaponById,
-  getMeleeWeaponById,
-  getAmmoById,
   calculateMechCost,
-  calculateUsedPlatforms,
-  calculateTotalPlatforms,
   calculateModifiedStats,
+  calculateTotalPlatforms,
+  calculateUsedPlatforms,
   formatCredits,
+  FRAME_PROFILES,
+  FrameType,
+  getMeleeWeaponById,
+  getRangedWeaponById,
+  getUpgradeById,
+  Mech,
 } from "@/lib/game-data";
-import { Trash, Trash2 } from "lucide-react";
-import { WeaponListItem } from "./WeaponListItem";
-import { StatsDisplay } from "./StatsDisplay";
-import { UpgradeListItem } from "./UpgradeListItem";
-import { UpgradeManager } from "./UpgradeManager";
-import { RangedManager } from "./RangedManager";
+import { Trash2 } from "lucide-react";
 import { MeleeManager } from "./MeleeManager";
+import { RangedManager } from "./RangedManager";
+import { StatsDisplay } from "./StatsDisplay";
+import { UpgradeManager } from "./UpgradeManager";
 
 interface MechBuilderProps {
   mech: Mech;
@@ -144,7 +133,8 @@ export function MechBuilder({ mech, mechIndex, onUpdate, onRemove }: MechBuilder
         <select
           value={mech.frameType}
           onChange={(e) => updateFrameType(e.target.value as FrameType)}
-          className="select select-lg">
+          className="select select-lg"
+        >
           {FRAME_PROFILES.map((frame) => (
             <option key={frame.id} value={frame.id}>
               {frame.name}

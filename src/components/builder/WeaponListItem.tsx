@@ -1,5 +1,4 @@
-import React from "react";
-import { RangedWeapon, MeleeWeapon, Ammo, formatCredits, getAmmoById } from "@/lib/game-data";
+import { Ammo, formatCredits, MeleeWeapon, RangedWeapon } from "@/lib/game-data";
 import { Trash2 } from "lucide-react";
 
 export type WeaponType = "ranged" | "melee";
@@ -39,7 +38,9 @@ export function WeaponListItem({
           {rangedWeapon?.maxRange && (
             <div className="text-gray-400 text-xs">Range: {rangedWeapon.maxRange}</div>
           )}
-          {meleeWeapon?.range && <div className="text-gray-400 text-xs">Range: {meleeWeapon.range}</div>}
+          {meleeWeapon?.range && (
+            <div className="text-gray-400 text-xs">Range: {meleeWeapon.range}</div>
+          )}
         </div>
         {onRemove && (
           <button onClick={onRemove} className="btn btn-sm btn-square btn-error btn-soft">
@@ -71,7 +72,8 @@ export function WeaponListItem({
                   e.target.value = "";
                 }
               }}
-              className="select select-sm w-full">
+              className="select select-sm w-full"
+            >
               <option value="">+ Add Ammo</option>
               {availableAmmo.map((ammoOption) => (
                 <option key={ammoOption.id} value={ammoOption.id}>

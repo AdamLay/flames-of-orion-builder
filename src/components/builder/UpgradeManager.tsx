@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { UPGRADES, getUpgradeById } from "@/lib/game-data";
+import { useState } from "react";
 import { UpgradeListItem } from "./UpgradeListItem";
 
 interface Props {
@@ -43,7 +43,8 @@ export function UpgradeManager({
       <button
         onClick={() => setIsDialogOpen(true)}
         disabled={!canAddUpgrades}
-        className="btn btn-accent btn-sm w-full mb-2 disabled:btn-disabled">
+        className="btn btn-accent btn-sm w-full mb-2 disabled:btn-disabled"
+      >
         + Add Upgrade
       </button>
 
@@ -58,12 +59,16 @@ export function UpgradeManager({
                   key={upgrade.id}
                   onClick={() => handleSelectUpgrade(upgrade.id)}
                   disabled={!canAddUpgrade(upgrade.id)}
-                  className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent">
+                  className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                >
                   <UpgradeListItem upgrade={upgrade} />
                 </button>
               ))}
             </div>
-            <button onClick={() => setIsDialogOpen(false)} className="btn btn-ghost btn-sm mt-4 w-full">
+            <button
+              onClick={() => setIsDialogOpen(false)}
+              className="btn btn-ghost btn-sm mt-4 w-full"
+            >
               Close
             </button>
           </div>

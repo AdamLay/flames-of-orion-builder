@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { MELEE_WEAPONS, getMeleeWeaponById, formatCredits } from "@/lib/game-data";
+import { MELEE_WEAPONS, getMeleeWeaponById } from "@/lib/game-data";
+import { useState } from "react";
 import { WeaponListItem } from "./WeaponListItem";
 
 interface Props {
@@ -43,7 +43,8 @@ export function MeleeManager({
       <button
         onClick={() => setIsDialogOpen(true)}
         disabled={!canAddWeapons}
-        className="btn btn-accent btn-sm w-full mb-2 disabled:btn-disabled">
+        className="btn btn-accent btn-sm w-full mb-2 disabled:btn-disabled"
+      >
         + Add Melee Weapon
       </button>
 
@@ -58,12 +59,16 @@ export function MeleeManager({
                   key={weapon.id}
                   onClick={() => handleSelectWeapon(weapon.id)}
                   disabled={!canAddWeapon(weapon.id)}
-                  className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent">
+                  className="w-full text-left hover:bg-base-100 rounded p-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                >
                   <WeaponListItem key={weapon.id} weapon={weapon} weaponType="melee" />
                 </button>
               ))}
             </div>
-            <button onClick={() => setIsDialogOpen(false)} className="btn btn-ghost btn-sm mt-4 w-full">
+            <button
+              onClick={() => setIsDialogOpen(false)}
+              className="btn btn-ghost btn-sm mt-4 w-full"
+            >
               Close
             </button>
           </div>

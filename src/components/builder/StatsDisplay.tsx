@@ -1,4 +1,3 @@
-import React from "react";
 import { MechStats } from "@/lib/game-data";
 
 interface StatsDisplayProps {
