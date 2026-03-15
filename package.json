@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
+    "dev": "vite dev",
+    "build": "vite build",
     "start": "node .output/server/index.mjs",
     "prepare": "vp config"
   },
@@ -29,6 +29,7 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@netlify/vite-plugin-tanstack-start": "^1.3.0",
     "@tailwindcss/vite": "^4.2.1",
     "@types/diff": "^8.0.0",
     "@types/lodash-es": "^4.17.12",
