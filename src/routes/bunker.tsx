@@ -67,23 +67,12 @@ function BunkerPage() {
       {isSmallScreen && (
         <Drawer.Root open={!!selectedMech} onClose={() => setSelectedBayId(null)}>
           <Drawer.Portal>
-            <Drawer.Overlay
-              style={{ position: "fixed", bottom: 0, left: 0, right: 0, top: 0 }}
-              className="fixed inset-0 bg-black/40"
-            />
-            <Drawer.Content
-              style={{
-                position: "fixed",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                maxHeight: "fit-content",
-                zIndex: 999,
-              }}
-              className="bg-base-200"
-            >
-              <div className="p-2"></div>
-              <Drawer.Handle />
+            <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+            <Drawer.Content className="bg-base-200 h-fit fixed bottom-0 left-0 right-0 outline-none">
+              <div className="p-3">
+                <Drawer.Handle />
+              </div>
+
               <div className="overflow-y-auto max-h-[85vh]">{selectedMechBuilder}</div>
             </Drawer.Content>
           </Drawer.Portal>

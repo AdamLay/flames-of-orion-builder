@@ -1,7 +1,7 @@
 import { UPGRADES, getUpgradeById } from "@/lib/game-data";
 import orderBy from "lodash-es/orderBy";
 import { useState } from "react";
-import { createPortal } from "react-dom";
+import { Drawer } from "vaul";
 import { UpgradeListItem } from "./UpgradeListItem";
 
 interface Props {
@@ -51,12 +51,17 @@ export function UpgradeManager({
       </button>
 
       {/* Available Upgrades Dialog */}
-      {isDialogOpen &&
-        createPortal(
-          <dialog open className="modal">
-            <div className="modal-box bg-base-200 max-h-[80vh] overflow-y-auto">
-              <h2 className="text-xl font-bold text-primary mb-4">SELECT UPGRADE</h2>
-              <div>
+      <Drawer.Root open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+          <Drawer.Content className="bg-base-200 h-fit fixed bottom-0 left-0 right-0 max-w-2xl mx-auto outline-none">
+            <div className="p-3">
+              <Drawer.Handle />
+            </div>
+
+            <div className="overflow-y-auto max-h-[85vh] p-4">
+              <h2 className="text-xl font-bold text-primary mb-2">SELECT UPGRADE</h2>
+              <div className="max-h-[75vh] overflow-y-auto">
                 {orderBy(UPGRADES, "cost").map((upgrade) => (
                   <button
                     key={upgrade.id}
@@ -68,16 +73,10 @@ export function UpgradeManager({
                   </button>
                 ))}
               </div>
-              <button
-                onClick={() => setIsDialogOpen(false)}
-                className="btn btn-ghost btn-sm mt-4 w-full"
-              >
-                Close
-              </button>
             </div>
-          </dialog>,
-          window.document.body,
-        )}
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
 
       {/* Equipped Upgrades */}
       <div className="mb-4 space-y-2">
