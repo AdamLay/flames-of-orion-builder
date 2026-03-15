@@ -10,7 +10,7 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      { title: "TanStack Start Starter" },
+      { title: "Flames of Orion Builder" },
       {
         name: "description",
         content: "Flames of Orion - Mech Combat Unit Builder and Rules Reference.",

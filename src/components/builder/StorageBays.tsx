@@ -1,6 +1,7 @@
 import { useBunkerStore } from "@/lib/bunkerStore";
 import { BAY_CAPACITY, Mech } from "@/lib/game-data";
 import { getTotalMechs } from "@/lib/utils";
+import MechBayDisplay from "./MechBayDisplay";
 
 interface StorageBaysProps {
   selectedBayId: string | null;
@@ -30,11 +31,13 @@ export default function StorageBays({ selectedBayId, setSelectedBayId }: Storage
           each bay
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="flex flex-col gap-4">
         {bunker.bays.map((bay, index) => (
           <div
             key={bay.id}
-            onClick={() => setSelectedBayId(selectedBayId === bay.id ? null : bay.id)}
+            onClick={() =>
+              bay.content ? setSelectedBayId(selectedBayId === bay.id ? null : bay.id) : null
+            }
             className={`card-1 p-4 cursor-pointer transition-all ${
               selectedBayId === bay.id ? "ring-2 ring-primary" : ""
             } ${bay.content ? "bg-opacity-60" : "bg-opacity-30"}`}
@@ -47,6 +50,8 @@ export default function StorageBays({ selectedBayId, setSelectedBayId }: Storage
             {bay.content ? (
               (() => {
                 const content = mechs.find((x) => x.id === bay.content?.ids[0]);
+                const isMech = bay.content?.type === "mech";
+                if (isMech) return <MechBayDisplay mech={content!} />;
                 return (
                   <div className="space-y-2">
                     <div className="text-sm font-bold capitalize">

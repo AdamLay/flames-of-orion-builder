@@ -14,8 +14,7 @@ export function UpgradeListItem({ upgrade, onRemove }: UpgradeListItemProps) {
           <div className="text-primary font-bold">{upgrade.name}</div>
           <div className="">
             {formatCredits(upgrade.cost)}
-            {upgrade.platformSlots === 0 && " (No PF)"}
-            {upgrade.platformSlots && upgrade.platformSlots > 1 && ` (${upgrade.platformSlots} PF)`}
+            {upgrade.platformSlots !== 1 && <span> • {upgrade.platformSlots || "No"} PF</span>}
           </div>
         </div>
         {onRemove && (

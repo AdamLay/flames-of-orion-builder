@@ -1,4 +1,5 @@
 import { UPGRADES, getUpgradeById } from "@/lib/game-data";
+import orderBy from "lodash-es/orderBy";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { UpgradeListItem } from "./UpgradeListItem";
@@ -56,7 +57,7 @@ export function UpgradeManager({
             <div className="modal-box bg-base-200 max-h-[80vh] overflow-y-auto">
               <h2 className="text-xl font-bold text-primary mb-4">SELECT UPGRADE</h2>
               <div>
-                {UPGRADES.map((upgrade) => (
+                {orderBy(UPGRADES, "cost").map((upgrade) => (
                   <button
                     key={upgrade.id}
                     onClick={() => handleSelectUpgrade(upgrade.id)}

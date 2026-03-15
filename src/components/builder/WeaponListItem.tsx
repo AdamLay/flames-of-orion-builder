@@ -55,14 +55,17 @@ export function WeaponListItem({
       {isRanged && onAddAmmo && onRemoveAmmo && (
         <div className="mt-2 pt-2 border-t border-base-300">
           {ammo ? (
-            <div className="flex justify-between items-start gap-2">
-              <div className="flex-1">
-                <div className="text-xs font-semibold text-accent">Ammo: {ammo.name}</div>
-                <div className="text-xs">{formatCredits(ammo.cost)}</div>
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between items-start gap-2">
+                <div className="flex-1">
+                  <div className="text-xs font-semibold text-accent">Ammo: {ammo.name}</div>
+                  <div className="text-xs">{formatCredits(ammo.cost)}</div>
+                </div>
+                <button onClick={onRemoveAmmo} className="btn btn-sm btn-square btn-error btn-soft">
+                  <Trash2 className="size-4" />
+                </button>
               </div>
-              <button onClick={onRemoveAmmo} className="btn btn-sm btn-square btn-error btn-soft">
-                <Trash2 className="size-4" />
-              </button>
+              <p className="text-xs text-gray-400">{ammo.description}</p>
             </div>
           ) : (
             <select
@@ -77,7 +80,12 @@ export function WeaponListItem({
               <option value="">+ Add Ammo</option>
               {availableAmmo.map((ammoOption) => (
                 <option key={ammoOption.id} value={ammoOption.id}>
-                  {ammoOption.name} - {formatCredits(ammoOption.cost)}
+                  <div className="flex flex-col">
+                    <p>
+                      {ammoOption.name} - {formatCredits(ammoOption.cost)}
+                    </p>
+                    <p className="text-xs text-gray-400">{ammoOption.description}</p>
+                  </div>
                 </option>
               ))}
             </select>

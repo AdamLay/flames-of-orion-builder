@@ -58,7 +58,7 @@ export function RangedManager({
       {isDialogOpen && (
         <dialog open className="modal">
           <div className="modal-box bg-base-200 max-h-[80vh] overflow-y-auto">
-            <h2 className="text-xl font-bold text-primary mb-4">Select Ranged Weapon</h2>
+            <h2 className="text-xl font-bold text-primary mb-4">SELECT WEAPON</h2>
             <div>
               {RANGED_WEAPONS.map((weapon) => (
                 <button
