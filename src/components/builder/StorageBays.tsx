@@ -49,14 +49,15 @@ export default function StorageBays({ selectedBayId, setSelectedBayId }: Storage
 
             {bay.content ? (
               (() => {
-                const content = mechs.find((x) => x.id === bay.content?.ids[0]);
+                const mechIndex = mechs.findIndex((x) => x.id === bay.content?.ids[0]);
+                const mech = mechIndex !== -1 ? mechs[mechIndex] : null;
                 const isMech = bay.content?.type === "mech";
-                if (isMech) return <MechBayDisplay mech={content!} />;
+                if (isMech) return <MechBayDisplay mech={mech!} index={mechIndex} />;
                 return (
                   <div className="space-y-2">
                     <div className="text-sm font-bold capitalize">
                       {bay.content.type.replace("-", " ")}:{" "}
-                      {content ? content.callSign : "Multiple Units"}
+                      {mech ? mech.callSign : "Multiple Units"}
                     </div>
                     <div className="text-xs text-gray-400">
                       {bay.content.ids.length} unit{bay.content.ids.length !== 1 ? "s" : ""} stored
