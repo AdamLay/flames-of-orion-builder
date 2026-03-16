@@ -1,5 +1,7 @@
 import {
   calculateMechCost,
+  calculateTotalPlatforms,
+  calculateUsedPlatforms,
   formatCredits,
   Mech,
   MELEE_WEAPONS,
@@ -18,11 +20,16 @@ export default function MechBayDisplay({ mech, index }: MechBayDisplayProps) {
   const meleeWeapons = mech.meleeWeapons.map((x) => MELEE_WEAPONS.find((u) => u.id === x));
   const rangedWeapons = mech.rangedWeapons.map((x) => RANGED_WEAPONS.find((u) => u.id === x));
   const cost = calculateMechCost(mech, index);
+  const usedPlatforms = calculateUsedPlatforms(mech);
+  const totalPlatforms = calculateTotalPlatforms(mech);
   return (
     <div className="space-y-1">
       <div className="flex justify-between">
         <div className="text-title font-bold">{mech.callSign}</div>
-        <p className="text-title text-gray-300 uppercase">{mech.frameType}</p>
+        <p className="text-title text-gray-300 uppercase">
+          <span className="text-secondary">{mech.frameType}</span> ({usedPlatforms}/{totalPlatforms}
+          )
+        </p>
       </div>
       <p className="text-xs font-bold text-gray-300">{formatCredits(cost)}</p>
       {meleeWeapons.length > 0 && (
