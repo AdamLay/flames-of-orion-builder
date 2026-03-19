@@ -7,8 +7,10 @@ import { ContextSwiper, SwiperContext } from "../ui/SwiperContext";
 
 export default function LobbyView() {
   const { slideIndex, handleSlideChange } = useContext(SwiperContext);
-  const { combatUnits } = useLobbyStore();
+  const lobbyState = useLobbyStore();
   const isSmallScreen = useMediaQuery("(max-width: 767px)");
+
+  const { combatUnits } = lobbyState;
 
   if (!isSmallScreen) {
     return (

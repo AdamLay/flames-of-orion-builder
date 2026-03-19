@@ -8,6 +8,11 @@ export type LobbyStoreState = {
   playerId: string;
   playerName: string;
   combatUnits: LobbyCombatUnit[];
+  gameState: GameState;
+};
+
+export type GameState = {
+  round: number;
 };
 
 type LobbyStoreActions = {
@@ -15,6 +20,7 @@ type LobbyStoreActions = {
   setPlayerName: (name: string) => void;
   setCombatUnits: (combatUnits: LobbyCombatUnit[]) => void;
   addCombatUnit: (combatUnit: LobbyCombatUnit) => void;
+  setGameState: (gameState: Partial<GameState>) => void;
 };
 type LobbyStore = LobbyStoreState & LobbyStoreActions;
 
@@ -23,6 +29,9 @@ export const useLobbyStore = create<LobbyStore>()((set, get) => ({
   playerId: (localStorage["playerId"] as string) || (localStorage["playerId"] = nanoid()),
   playerName: (localStorage["playerName"] as string) || "",
   combatUnits: [],
+  gameState: {
+    round: 1,
+  },
 
   setLobbyId: (id) => set({ lobbyId: id }),
   setPlayerName: (name) => {
@@ -34,4 +43,5 @@ export const useLobbyStore = create<LobbyStore>()((set, get) => ({
     set((state) => ({
       combatUnits: [...state.combatUnits, combatUnit],
     })),
+  setGameState: (gameState) => set({ gameState: { ...get().gameState, ...gameState } }),
 }));
