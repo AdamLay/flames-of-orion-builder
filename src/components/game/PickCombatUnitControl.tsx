@@ -16,7 +16,7 @@ export default function PickCombatUnitControl() {
     const selectedMechs = mechs.filter((m) => selected.includes(m.id));
     const player = { id: playerId, name: playerName };
     socket!.emit(Events.client_join, lobbyId, { player, units: selectedMechs });
-    addCombatUnit({ player, units: selectedMechs });
+    addCombatUnit({ player, units: selectedMechs }, { broadcast: false });
   };
 
   return (

@@ -1,5 +1,10 @@
 import { env } from "@/env/client";
-import { LobbyStoreState, useLobbyStore } from "@/lib/lobbyStore";
+import {
+  LobbyStoreState,
+  LobbySyncAction,
+  setLobbySyncEmitter,
+  useLobbyStore,
+} from "@/lib/lobbyStore";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
@@ -12,6 +17,11 @@ export interface JoinData {
   lobbyId: string;
   lobbyHost: PlayerSocket;
   lobbyClients: PlayerSocket[];
+}
+
+export interface LobbyDispatchEvent {
+  sourcePlayerId: string;
+  action: LobbySyncAction;
 }
 
 const socketUrl = env.VITE_LOBBY_URL;
@@ -40,6 +50,19 @@ export function useGameLobby() {
 
     const skt = (socket = io(socketUrl));
 
+    setLobbySyncEmitter((action) => {
+      console.log("Broadcasting lobby action:", action);
+      const { lobbyId, playerId } = useLobbyStore.getState();
+      if (!lobbyId) return;
+
+      const lobbyDispatch: LobbyDispatchEvent = {
+        sourcePlayerId: playerId,
+        action,
+      };
+
+      skt.emit(Events.lobby_dispatch, lobbyId, lobbyDispatch);
+    });
+
     skt.onAny((...args: any[]) => {
       console.log("%c Event", "color: #BB86FC;", args);
     });
@@ -59,10 +82,7 @@ export function useGameLobby() {
       if (skt.id === socketId) return; // Ignore if this is our own join request
 
       // Add the new player's combat unit to our store
-      useLobbyStore.setState((state) => ({
-        ...state,
-        combatUnits: [...state.combatUnits, combatUnit],
-      }));
+      useLobbyStore.getState().addCombatUnit(combatUnit, { broadcast: false });
 
       // Let the player know we have recd the join request and updated the lobby state
       skt.emit(Events.client_join_ack, socketId, useLobbyStore.getState());
@@ -72,18 +92,35 @@ export function useGameLobby() {
     skt.on(Events.client_join_ack, (lobbyState: LobbyStoreState) => {
       const myPlayerId = useLobbyStore.getState().playerId;
       const remoteCombatUnits = lobbyState.combatUnits.filter((x) => x.player.id !== myPlayerId);
-      useLobbyStore.setState((state) => ({
-        ...state,
-        combatUnits: [
-          ...state.combatUnits.filter((x) => x.player.id === myPlayerId),
-          ...remoteCombatUnits,
-        ],
-      }));
+
+      const myCombatUnits = useLobbyStore
+        .getState()
+        .combatUnits.filter((x) => x.player.id === myPlayerId);
+
+      const state = useLobbyStore.getState();
+      state.setCombatUnits([...myCombatUnits, ...remoteCombatUnits], {
+        broadcast: false,
+      });
+      state.setGameState(lobbyState.gameState, { broadcast: false });
+
       // We'll receive one of these from every other client in the lobby when we join
       console.log("Client join ack recd:", lobbyState);
     });
 
+    skt.on(Events.lobby_dispatch, (event: LobbyDispatchEvent) => {
+      console.log("Lobby dispatch recd:", event);
+      const { playerId, applySyncAction } = useLobbyStore.getState();
+
+      if (event.sourcePlayerId === playerId) return;
+
+      applySyncAction(event.action);
+    });
+
     setLoaded(true);
+
+    return () => {
+      setLobbySyncEmitter(null);
+    };
   }, []);
 
   return { socket, loaded };
