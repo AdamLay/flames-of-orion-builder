@@ -37,5 +37,4 @@ yarn-error.log*
 
 /dist
 
-# Local Netlify folder
-.netlify
+.wrangler

@@ -13,12 +13,9 @@ export default function BunkerOverview() {
   const getAvailableCredits = (): number => {
     return BUNKER_STARTING_CREDITS - getSpentCredits();
   };
-  const getUsedBayCount = () => {
-    return bunker.bays.filter((bay) => bay.content !== null).length;
-  };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4 text-center">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-center">
       <div className="bg-base-200 p-2 rounded col-span-2">
         <div className="text-primary font-bold text-sm">BUNKER NAME</div>
         <BunkerName />
@@ -33,13 +30,6 @@ export default function BunkerOverview() {
       <div className="bg-base-200 p-2 rounded">
         <div className="text-primary font-bold text-sm">MECHS</div>
         <div className="text-title text-3xl font-bold">{getTotalMechs(bunker)}</div>
-      </div>
-
-      <div className="bg-base-200 p-2 rounded">
-        <div className="text-primary font-bold text-sm">USED BAYS</div>
-        <div className="text-title text-2xl font-bold">
-          {getUsedBayCount()}/{bunker.bays.length}
-        </div>
       </div>
     </div>
   );

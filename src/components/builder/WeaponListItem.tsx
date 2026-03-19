@@ -30,7 +30,7 @@ export function WeaponListItem({
     <div className="card-small text-sm">
       <div className="flex justify-between items-start">
         <div className="flex-1">
-          <div className="text-primary font-bold flex gap-1 items-center mb-1">
+          <div className="text-secondary font-bold flex gap-1 items-center mb-1">
             {rangedWeapon ? <Crosshair size={16} /> : <Sword size={16} />}
             {weapon.name}
           </div>

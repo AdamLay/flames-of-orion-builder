@@ -504,6 +504,17 @@ export const AMMO: Ammo[] = [
   },
 ];
 
+const upgradeRules = UPGRADES.map((u) => [u.id, u.description]);
+const rangedWeaponRules = RANGED_WEAPONS.map((w) => [w.id, w.special || ""]);
+const meleeWeaponRules = MELEE_WEAPONS.map((w) => [w.id, w.special || ""]);
+const ammoRules = AMMO.map((a) => [a.id, a.description]);
+export const allRules = new Map<string, string>([
+  ...upgradeRules,
+  ...rangedWeaponRules,
+  ...meleeWeaponRules,
+  ...ammoRules,
+] as any);
+
 // Helper functions
 export function getFrameProfileById(id: FrameType): FrameProfile | undefined {
   return FRAME_PROFILES.find((f) => f.id === id);

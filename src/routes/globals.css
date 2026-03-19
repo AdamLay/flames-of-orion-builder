@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "daisyui" {
+  /* themes: sunset --default; */
   themes: dark --default;
 }
 

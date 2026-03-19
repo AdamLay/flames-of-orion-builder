@@ -25,12 +25,12 @@ export default function StorageBays({ selectedBayId, setSelectedBayId }: Storage
     <div className="mb-6">
       <h2 className="text-2xl font-bold mb-2 text-primary">STORAGE BAYS</h2>
 
-      <div className="card-1 mb-4 bg-opacity-50 border-l-4 border-primary">
+      {/* <div className="card-1 mb-4 bg-opacity-50 border-l-4 border-primary">
         <p className="text-xs text-gray-400">
           Bay Capacity: You may store 1 Mech, or 2 ground vehicles, 2 aircraft, or 3 infantry in
           each bay
         </p>
-      </div>
+      </div> */}
       <div className="flex flex-col gap-4">
         {bunker.bays.map((bay, index) => (
           <div

@@ -1,9 +1,6 @@
 import BunkerOverview from "@/components/builder/BunkerOverview";
-import CreateNewButton from "@/components/builder/CreateNewButton";
 import EmptyBunker from "@/components/builder/EmptyBunker";
-import LoadButton from "@/components/builder/LoadButton";
 import { MechBuilder } from "@/components/builder/MechBuilder";
-import ShareButton from "@/components/builder/ShareButton";
 import StorageBays from "@/components/builder/StorageBays";
 import { useLoadFromUrl, useLoadLastBunker, useMediaQuery } from "@/hooks";
 import { useBunkerStore } from "@/lib/bunkerStore";
@@ -45,11 +42,6 @@ function BunkerPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-2">
-      <div className="flex justify-end gap-4 mb-4">
-        <CreateNewButton />
-        <LoadButton />
-        <ShareButton />
-      </div>
       <BunkerOverview />
 
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4">

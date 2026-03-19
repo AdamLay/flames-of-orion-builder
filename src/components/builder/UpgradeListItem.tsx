@@ -11,7 +11,7 @@ export function UpgradeListItem({ upgrade, onRemove }: UpgradeListItemProps) {
     <div className="card-small text-sm">
       <div className="flex justify-between items-start">
         <div className="flex-1">
-          <div className="text-primary font-bold">{upgrade.name}</div>
+          <div className="text-secondary font-bold">{upgrade.name}</div>
           <div className="">
             {formatCredits(upgrade.cost)}
             {upgrade.platformSlots !== 1 && <span> • {upgrade.platformSlots || "No"} PF</span>}

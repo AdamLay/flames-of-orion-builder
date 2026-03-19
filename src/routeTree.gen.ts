@@ -8,97 +8,151 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as RulesRouteImport } from './routes/rules'
-import { Route as BunkerRouteImport } from './routes/bunker'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as ViewRouteImport } from "./routes/view";
+import { Route as RulesRouteImport } from "./routes/rules";
+import { Route as LoadRouteImport } from "./routes/load";
+import { Route as GameRouteImport } from "./routes/game";
+import { Route as BunkerRouteImport } from "./routes/bunker";
+import { Route as IndexRouteImport } from "./routes/index";
 
+const ViewRoute = ViewRouteImport.update({
+  id: "/view",
+  path: "/view",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const RulesRoute = RulesRouteImport.update({
-  id: '/rules',
-  path: '/rules',
+  id: "/rules",
+  path: "/rules",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
+const LoadRoute = LoadRouteImport.update({
+  id: "/load",
+  path: "/load",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const GameRoute = GameRouteImport.update({
+  id: "/game",
+  path: "/game",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const BunkerRoute = BunkerRouteImport.update({
-  id: '/bunker',
-  path: '/bunker',
+  id: "/bunker",
+  path: "/bunker",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/bunker': typeof BunkerRoute
-  '/rules': typeof RulesRoute
+  "/": typeof IndexRoute;
+  "/bunker": typeof BunkerRoute;
+  "/game": typeof GameRoute;
+  "/load": typeof LoadRoute;
+  "/rules": typeof RulesRoute;
+  "/view": typeof ViewRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/bunker': typeof BunkerRoute
-  '/rules': typeof RulesRoute
+  "/": typeof IndexRoute;
+  "/bunker": typeof BunkerRoute;
+  "/game": typeof GameRoute;
+  "/load": typeof LoadRoute;
+  "/rules": typeof RulesRoute;
+  "/view": typeof ViewRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/bunker': typeof BunkerRoute
-  '/rules': typeof RulesRoute
+  __root__: typeof rootRouteImport;
+  "/": typeof IndexRoute;
+  "/bunker": typeof BunkerRoute;
+  "/game": typeof GameRoute;
+  "/load": typeof LoadRoute;
+  "/rules": typeof RulesRoute;
+  "/view": typeof ViewRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/bunker' | '/rules'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bunker' | '/rules'
-  id: '__root__' | '/' | '/bunker' | '/rules'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/bunker" | "/game" | "/load" | "/rules" | "/view";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/bunker" | "/game" | "/load" | "/rules" | "/view";
+  id: "__root__" | "/" | "/bunker" | "/game" | "/load" | "/rules" | "/view";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BunkerRoute: typeof BunkerRoute
-  RulesRoute: typeof RulesRoute
+  IndexRoute: typeof IndexRoute;
+  BunkerRoute: typeof BunkerRoute;
+  GameRoute: typeof GameRoute;
+  LoadRoute: typeof LoadRoute;
+  RulesRoute: typeof RulesRoute;
+  ViewRoute: typeof ViewRoute;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/rules': {
-      id: '/rules'
-      path: '/rules'
-      fullPath: '/rules'
-      preLoaderRoute: typeof RulesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bunker': {
-      id: '/bunker'
-      path: '/bunker'
-      fullPath: '/bunker'
-      preLoaderRoute: typeof BunkerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+    "/view": {
+      id: "/view";
+      path: "/view";
+      fullPath: "/view";
+      preLoaderRoute: typeof ViewRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/rules": {
+      id: "/rules";
+      path: "/rules";
+      fullPath: "/rules";
+      preLoaderRoute: typeof RulesRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/load": {
+      id: "/load";
+      path: "/load";
+      fullPath: "/load";
+      preLoaderRoute: typeof LoadRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/game": {
+      id: "/game";
+      path: "/game";
+      fullPath: "/game";
+      preLoaderRoute: typeof GameRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/bunker": {
+      id: "/bunker";
+      path: "/bunker";
+      fullPath: "/bunker";
+      preLoaderRoute: typeof BunkerRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BunkerRoute: BunkerRoute,
+  GameRoute: GameRoute,
+  LoadRoute: LoadRoute,
   RulesRoute: RulesRoute,
-}
+  ViewRoute: ViewRoute,
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+import type { getRouter } from "./router.tsx";
+import type { createStart } from "@tanstack/react-start";
+declare module "@tanstack/react-start" {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    ssr: true;
+    router: Awaited<ReturnType<typeof getRouter>>;
   }
 }
