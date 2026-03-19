@@ -22,6 +22,7 @@
     "lucide": "^0.577.0",
     "lucide-react": "^0.577.0",
     "nanoid": "^5.1.6",
+    "nitro": "3.0.260311-beta",
     "pako": "^2.1.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -33,7 +34,6 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.29.0",
     "@tailwindcss/vite": "^4.2.1",
     "@types/diff": "^8.0.0",
     "@types/lodash-es": "^4.17.12",
