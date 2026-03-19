@@ -22,7 +22,9 @@ export default defineConfig({
     tanstackStart({
       srcDirectory: "src", // This is the default
     }),
-    nitro(),
+    nitro({
+      buildDir: "dist",
+    }),
     viteReact(),
   ],
 });
