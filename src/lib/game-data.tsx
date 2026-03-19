@@ -1,5 +1,8 @@
 // Flames of Orion - Game Data and Types
 
+import { Cog, FastForward, Flame, LucideProps, Shield, Target } from "lucide-react";
+import { ForwardRefExoticComponent } from "react";
+
 export type FrameType = "light" | "medium" | "heavy";
 
 export interface FrameProfile {
@@ -26,6 +29,7 @@ export interface Upgrade {
   special?: string;
   stackable?: boolean;
   platformSlots?: number; // How many platform slots this uses (default 1)
+  icon: ForwardRefExoticComponent<Omit<LucideProps, "ref">>;
 }
 
 export interface RangedWeapon {
@@ -165,6 +169,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 10000,
     description: "AR becomes 5+.",
     platformSlots: 1,
+    icon: Shield,
   },
   {
     id: "armor-mk2",
@@ -172,6 +177,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 25000,
     description: "AR becomes 4+.",
     platformSlots: 1,
+    icon: Shield,
   },
   {
     id: "reactive-armor",
@@ -179,6 +185,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 50000,
     description: "Ignore the first 1 point of Damage this model takes per turn.",
     platformSlots: 1,
+    icon: Shield,
   },
   {
     id: "vtol",
@@ -186,6 +193,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 25000,
     description: "Ignore terrain when making a Move Action.",
     platformSlots: 1,
+    icon: FastForward,
   },
   {
     id: "thrusters",
@@ -195,6 +203,7 @@ export const UPGRADES: Upgrade[] = [
     special: "Stackable",
     stackable: true,
     platformSlots: 1,
+    icon: FastForward,
   },
   {
     id: "heat-sink",
@@ -202,6 +211,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 10000,
     description: "New HEAT Check values; 1=2 HEAT, 2=1 HEAT, 3-6=0 HEAT",
     platformSlots: 1,
+    icon: Flame,
   },
   {
     id: "sensor-array",
@@ -209,6 +219,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 25000,
     description: "Critical Hits deal an extra +1 damage.",
     platformSlots: 1,
+    icon: Cog,
   },
   {
     id: "heavy-plating",
@@ -218,6 +229,7 @@ export const UPGRADES: Upgrade[] = [
     special: "Stackable",
     stackable: true,
     platformSlots: 1,
+    icon: Shield,
   },
   {
     id: "core-stabilizers",
@@ -227,6 +239,7 @@ export const UPGRADES: Upgrade[] = [
     special: "Stackable",
     stackable: true,
     platformSlots: 1,
+    icon: Flame,
   },
   {
     id: "extra-platforms",
@@ -236,6 +249,7 @@ export const UPGRADES: Upgrade[] = [
     special: "Stackable. Does not use a PF slot.",
     stackable: true,
     platformSlots: 0,
+    icon: Cog,
   },
   {
     id: "self-destruct",
@@ -244,6 +258,7 @@ export const UPGRADES: Upgrade[] = [
     description:
       "During your turn if you have 7 or more HEAT, you may make a <Self Destruct Action>. Your model explodes.",
     platformSlots: 1,
+    icon: Flame,
   },
   {
     id: "camouflage",
@@ -252,6 +267,7 @@ export const UPGRADES: Upgrade[] = [
     description:
       "You may use an action to gain the <Active Camo> status until this model's next action. While under the effects of <Active Camo>, enemy models making Ranged attacks modify their CS rolls by -1.",
     platformSlots: 1,
+    icon: Cog,
   },
   {
     id: "nuclear-core",
@@ -259,6 +275,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 10000,
     description: "When this Mech explodes, it explodes as if it were at HEAT 10.",
     platformSlots: 1,
+    icon: Flame,
   },
   {
     id: "targeting-system",
@@ -266,6 +283,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 45000,
     description: "This model improves their CS rolls by +1.",
     platformSlots: 1,
+    icon: Cog,
   },
   {
     id: "up-link",
@@ -274,6 +292,7 @@ export const UPGRADES: Upgrade[] = [
     description:
       "You may spend an Action and target an enemy model in Line of Sight; the target model gains Position Compromised.",
     platformSlots: 1,
+    icon: Cog,
   },
   {
     id: "long-range-targeting",
@@ -281,6 +300,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 15000,
     description: "When making Ranged Actions, ignore the Long Range rule.",
     platformSlots: 1,
+    icon: Target,
   },
   {
     id: "defense-array",
@@ -289,6 +309,7 @@ export const UPGRADES: Upgrade[] = [
     description:
       'Any time an enemy model gets within 1", roll a d6. On a 4+ the enemy model instead is placed just outside 1".',
     platformSlots: 1,
+    icon: Cog,
   },
   {
     id: "thermal-imaging",
@@ -296,6 +317,7 @@ export const UPGRADES: Upgrade[] = [
     cost: 20000,
     description: "When targeting a model with 5 or more HEAT, gain +1 to your CS roll.",
     platformSlots: 1,
+    icon: Target,
   },
   {
     id: "counter-missiles",
@@ -304,6 +326,7 @@ export const UPGRADES: Upgrade[] = [
     description:
       "When hit with a ranged critical hit, negate all extra damage from the critical hit.",
     platformSlots: 1,
+    icon: Cog,
   },
   {
     id: "virus-program",
@@ -312,6 +335,7 @@ export const UPGRADES: Upgrade[] = [
     description:
       "Once per game: When you activate the model equipped with this Upgrade, you may select an enemy model to infect. The infected model may take only one action this turn. That action cannot be bolstered.",
     platformSlots: 1,
+    icon: Cog,
   },
 ];
 

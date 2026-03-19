@@ -12,10 +12,10 @@ import {
   Mech,
 } from "@/lib/game-data";
 import { Trash2 } from "lucide-react";
-import { MeleeManager } from "./MeleeManager";
-import { RangedManager } from "./RangedManager";
 import { StatsDisplay } from "./StatsDisplay";
-import { UpgradeManager } from "./UpgradeManager";
+import { MeleeManager } from "./upgrades/MeleeManager";
+import { RangedManager } from "./upgrades/RangedManager";
+import { UpgradeManager } from "./upgrades/UpgradeManager";
 
 interface MechBuilderProps {
   mech: Mech;

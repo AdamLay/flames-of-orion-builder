@@ -10,7 +10,7 @@ interface StatsDisplayProps {
 export function StatsDisplay({ stats, usedPlatforms, totalPlatforms, compact }: StatsDisplayProps) {
   return (
     <div
-      className={`grid grid-cols-2 md:grid-cols-3 gap-4 text-center ${compact ? "lg:grid-cols-5" : "lg:grid-cols-6"}`}
+      className={`grid grid-cols-3 sm:grid-cols-5 gap-4 text-center ${compact ? "lg:grid-cols-5" : "lg:grid-cols-6"}`}
     >
       <div className={`bg-base-100 rounded ${compact ? "p-1" : "p-2"}`}>
         <div className="text-primary font-bold text-xs">SPEED</div>

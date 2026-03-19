@@ -28,6 +28,10 @@ export default function MenuBar() {
       text: "GAME",
       path: "/game",
     },
+    {
+      text: "VIEW",
+      path: "/view",
+    },
   ];
 
   const handleShare = async () => {
@@ -41,24 +45,24 @@ export default function MenuBar() {
     });
   };
 
-  const handleCreateNew = () => {
+  const handleCreateNew = async () => {
     if (
       confirm("Are you sure you want to create a new bunker? This will clear your current bunker.")
     ) {
       initializeBunker();
-      navigate({ to: "/bunker" });
+      await navigate({ to: "/bunker" });
     }
   };
 
   return (
     <>
       <div className="navbar bg-base-200 shadow-sm">
-        <div className="navbar-start">
+        <div className="navbar-start w-auto flex-1">
           <a className="btn btn-ghost text-xl">Flames of Orion</a>
         </div>
 
         <div className="navbar-end flex gap-2 ">
-          <ul className="menu menu-horizontal px-1 gap-2">
+          <ul className="menu menu-horizontal px-1 gap-2 hidden md:flex">
             {buttons.map((button) => (
               <li key={button.path}>
                 <a
@@ -75,13 +79,16 @@ export default function MenuBar() {
               <Menu />
             </div>
             <ul className="menu dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              {buttons.map((btn) => (
+                <li key={btn.path}>
+                  <a href={btn.path}>{btn.text}</a>
+                </li>
+              ))}
+              <hr className="my-2 border-gray-400" />
               <li>
                 <button onClick={handleShare}>
                   <Share2 size={18} /> Share Bunker URL
                 </button>
-              </li>
-              <li>
-                <a href="/view">View Mechs</a>
               </li>
               <li>
                 <a href="/load">

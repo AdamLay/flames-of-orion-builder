@@ -1,7 +1,7 @@
 import { UPGRADES } from "@/lib/game-data";
 import orderBy from "lodash-es/orderBy";
+import { UpgradeListItem } from "../UpgradeListItem";
 import { ItemListManager } from "./ItemListManager";
-import { UpgradeListItem } from "./UpgradeListItem";
 
 interface Props {
   upgrades: string[];

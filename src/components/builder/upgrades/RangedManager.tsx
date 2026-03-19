@@ -1,6 +1,6 @@
 import { AMMO, getAmmoById, RANGED_WEAPONS, RangedWeapon } from "@/lib/game-data";
+import { WeaponListItem } from "../WeaponListItem";
 import { ItemListManager } from "./ItemListManager";
-import { WeaponListItem } from "./WeaponListItem";
 
 interface Props {
   rangedWeapons: string[];

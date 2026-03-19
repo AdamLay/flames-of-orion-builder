@@ -1,6 +1,6 @@
 import { MELEE_WEAPONS } from "@/lib/game-data";
+import { WeaponListItem } from "../WeaponListItem";
 import { ItemListManager } from "./ItemListManager";
-import { WeaponListItem } from "./WeaponListItem";
 
 interface Props {
   meleeWeapons: string[];
