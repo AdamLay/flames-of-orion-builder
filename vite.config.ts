@@ -23,7 +23,9 @@ export default defineConfig({
       srcDirectory: "src", // This is the default
     }),
     nitro({
-      buildDir: "dist",
+      output: {
+        dir: "dist",
+      },
     }),
     viteReact(),
   ],
