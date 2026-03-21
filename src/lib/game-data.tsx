@@ -40,6 +40,7 @@ export interface RangedWeapon {
   maxRange?: string;
   special?: string;
   platformSlots?: number; // Default 1, Heavy Weapon uses 2
+  hasAmmo: boolean;
 }
 
 export interface Ammo {
@@ -350,6 +351,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     special:
       "On a successful Hit, increase target models HEAT by 1d2. May not be equipped with Specialty Ammunition.",
     platformSlots: 1,
+    hasAmmo: false,
   },
   {
     id: "light-weapon",
@@ -357,6 +359,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     cost: 10000,
     damage: "1",
     platformSlots: 1,
+    hasAmmo: true,
   },
   {
     id: "medium-weapon",
@@ -364,6 +367,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     cost: 15000,
     damage: "2",
     platformSlots: 1,
+    hasAmmo: true,
   },
   {
     id: "heavy-weapon",
@@ -373,6 +377,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     special:
       "Equipped model may only move at half speed if it fires this weapon this turn. Takes up 2 PFs.",
     platformSlots: 2,
+    hasAmmo: true,
   },
   {
     id: "rail-weapon",
@@ -382,6 +387,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     special:
       "Pick a visible point on the battlefield. Draw a straight line starting from the firing model to the chosen point. Roll one attack for each model and destructible terrain the line passes over. This attack hits friendly models. The firing model gains +1 HEAT when this weapon is used.",
     platformSlots: 1,
+    hasAmmo: true,
   },
   {
     id: "ai-missile-system",
@@ -392,6 +398,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     special:
       "When making a Ranged Attack, this weapon does not require line of sight. Ignore any cover bonus.",
     platformSlots: 1,
+    hasAmmo: true,
   },
   {
     id: "long-range-systems",
@@ -400,6 +407,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     damage: "2 (AP)",
     special: "Ignore the -1 CS from firing at Long Range.",
     platformSlots: 1,
+    hasAmmo: true,
   },
   {
     id: "large-missile-battery",
@@ -409,6 +417,7 @@ export const RANGED_WEAPONS: RangedWeapon[] = [
     special:
       'When targeting a model, roll to hit with this weapon against all models and terrain within 2" of the original target.',
     platformSlots: 1,
+    hasAmmo: true,
   },
 ];
 

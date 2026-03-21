@@ -55,7 +55,7 @@ export function WeaponListItem({
       {weapon.special && <div className="text-gray-400 text-xs mt-1">{weapon.special}</div>}
 
       {/* Ammo Selection (only for ranged weapons) */}
-      {isRanged && onAddAmmo && onRemoveAmmo && (
+      {isRanged && rangedWeapon?.hasAmmo && onAddAmmo && onRemoveAmmo && (
         <div className="mt-2 pt-2 border-t border-base-300">
           {ammo ? (
             <div className="flex flex-col gap-2">
